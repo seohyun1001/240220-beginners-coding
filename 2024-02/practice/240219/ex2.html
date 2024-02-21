@@ -197,16 +197,18 @@ if(document.querySelector('#night_day2').value === 'night') {
 
     <p><b>- 배열과 반복문(연습 : 짝수 출력)</b></p>
     <p>1) while 문 사용</p>
-    <ul>
-        <script>
-            if(i % 2 == 0) {
-                document.write('<li>'+ i +'</li>');
+
+    <p>2) if 문 사용</p>
+    <script>
+        var sampleEven = []
+        var i = 1;
+        while (i < 10) {
+            if (i % 2 == 0) {
+                document.write('<li>' + i + '</li>');
             }
             i = i + 1;
         }
-        </script>
-    </ul>
-    <p>2) if 문 사용</p>
+    </script>
 
 
 

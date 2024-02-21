@@ -11,22 +11,65 @@
 
 <body>
     <h1><a href="index.html">WEB</a></h1>
+    <div id="grid">
         <ol>
             <li><a href="1 html.html">HTML</a></li>
             <li><a href="2 css.html">CSS</a></li>
             <li><a href="3 javaScript.html">JavaScript</a></li>
         </ol>
-        <h2>CSS란 무엇인가?</h2>
-        <p style="margin-top: 40px;">
-            Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation
-            of a document written in a markup language such as HTML.[1] CSS is a cornerstone technology
-            of the World Wide Web, alongside HTML and JavaScript.[2]
-            CSS is designed to enable the separation of presentation and content, including layout,
-            colors, and fonts.[3] This separation can improve content accessibility; provide more flexibility
-            and control in the specification of presentation characteristics; enable multiple web pages to
-            share formatting by specifying the relevant CSS in a separate .css file, which reduces complexity
-            and repetition in the structural content
-        </p>
+        <div id="article">
+            <input type="button" id="changeColorBtn" value="night" onclick="
+    var target = document.querySelector('body');
+    // 원래  document.querySelector('body')를 if문에 다 적어줘야 했으나,
+    // 여기서는 target이라는 변수를 지정해 target을 사용함
+    if (this.value === 'night') {
+        // this는 위의 input을 의미
+        // 만약 input의 value가 night이라면 else 전까지 수행
+        target.style.backgroundColor = 'black';
+        target.style.color = 'white';
+        this.value = 'day'
+
+        // alist : 모든 태그 요소를 가져와서 배열에 담기
+        var alist = document.querySelectorAll('a');
+        // 상태 변수, 활용은 초기값으로 활용
+        var i = 0;
+        while (i < alist.length) {
+            // alist.length : 총수량, 배열의 길이
+            // 뜻 : i가 alist의 총길이보다 작을 때(까지)
+            alist[i].style.color = 'powderblue'
+            // alist i의 색깔을 'powderblue'로 변환한다
+            // 즉, 배열의 길이는 4이며, 배열의 인덱스는 0부터 '3'까지이기 때문에
+            // while문은 alist 배열의 모든 요소에 적용되게 된다.
+            // alist = [요소1(i=0), 요소2(i=1), 요소3(i=2), 요소4(i=3)]
+            console.log(alist[i]);
+            i = i + 1;
+        }
+
+    } else {
+        target.style.backgroundColor = 'white';
+        target.style.color = 'black';
+        this.value = 'night'
+        var alist = document.querySelectorAll('a');
+        var i = 0;
+        while (i < alist.length) {
+            alist[i].style.color = 'blue';
+            console.log(alist[i]);
+            i = i + 1;
+        }
+    }">
+            <h2>CSS란 무엇인가?</h2>
+            <p style="margin-top: 40px;">
+                Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation
+                of a document written in a markup language such as HTML.[1] CSS is a cornerstone technology
+                of the World Wide Web, alongside HTML and JavaScript.[2]
+                CSS is designed to enable the separation of presentation and content, including layout,
+                colors, and fonts.[3] This separation can improve content accessibility; provide more flexibility
+                and control in the specification of presentation characteristics; enable multiple web pages to
+                share formatting by specifying the relevant CSS in a separate .css file, which reduces complexity
+                and repetition in the structural content
+            </p>
+        </div>
+    </div>
 </body>
 
 </html>
