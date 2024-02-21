@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+  h1 {
+    border-width: 5px;
+    border-color: pink;
+    border-style: solid;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    /* 폭 : width 
+높이 : height 
+콘텐츠와 테두리 사이의 간격은 : padding 
+테두리와 테두리 사이의 간격 : margin  */
+    /* display: block;
+      width: 100px; */
+    /* display: inline; */
+    /* -> 원래 block element였으나 강제로 inline으로 바꿈 */
+  }
+
+  a {
+    border-width: 5px;
+    border-color: rgb(46, 46, 255);
+    border-style: solid;
+  }
+
+  /* * 같은 내용일 경우 -> 코드 중복제거 refactoring 
+  즉, 선택자에서 ‘,’ 라는 선택자를 통해 코드의 양을 획기적으로 줄일 수 있음. */
+  /* 예)
+<style>
+    h1 , a {
+      border-width: 5px;
+      border-color: red;
+      border-style: solid;
+    }
+</style> */
+/* * h1, a : 모든 h1 요소와 a 요소를 모두 선택 */
+
+
+</style>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Box</title>
+</head>
+
+<body>
+  <h1>CSS</h1> Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation of a
+  document written in a markup language such as HTML.
+
+  <h1>CSS</h1> Cascading Style Sheets (<a href="https://en.wikipedia.org/wiki/CSS">(CSS)</a> is a style sheet language
+  used for describing the presentation of a document written in a markup language such as HTML.
+
+</body>
+
+</html>

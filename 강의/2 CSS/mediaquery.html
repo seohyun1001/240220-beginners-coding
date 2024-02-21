@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+div {
+    border: 10px solid green;
+    font-size: 60px;
+}
+
+/* @media(min-width:800px) {
+    div {
+      display : none;
+    }
+} */
+/* -> 최소 가로 길이가
+800px 이상이면 사라짐
+800px미만이면 나타남 */
+
+@media(max-width:800px) {
+    div {
+      display : none;
+    }
+}
+/* -> 최소 가로 길이가
+800px 이하면 사라짐
+800px 초과면 나타남 */
+
+
+
+/* web/2024-02/sources/240214 html 문서 4개에 적용시킨 미디어 쿼리 */
+
+/* @media(max-width :800px){
+-> 1. 화면의 가로 길이가 800px 이하가 되면
+
+    #grid {
+        display: block;
+    }
+    -> 2. grid 속성을 inline에서 block으로 바꿈
+
+    #grid ol {
+        border-right: none;
+    }
+    -> 3. griddml ol 속성 보더-오른쪽을 없앰
+
+    h1 {
+        border-bottom: none;
+    }
+    -> 4. h1의 보더-아래쪽을 없앰
+
+    h2 {
+        color: blueviolet;
+    }
+    -> 5. h2의 색깔을 blueviolet으로 바꿈 */
+
+    </style>
+</head>
+<body>
+<h1
+    <div>Responsive</div>
+    
+</body>
+</html>

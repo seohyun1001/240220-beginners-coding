@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<!--문서의 종류-->
+<html lang="ko">
+<!--해당 언어를 의미, 검색시 사용이 됨-->
+
+<!--메타 태그와, css파일, js파일 연결해주고,
+    타이틀, 웹 브라우저의 작은 탭 창에서의 제목-->
+
+<head>
+    <meta charset="UTF-8">
+    <!--웹 브라우저에서 한글을 사용할 수 있게 설정하는 언어셋, UTF-8-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--반응형 웹처럼, 모바일 등의 기기에 맞게끔 크기가 조정이 됨-->
+    <title>240214</title>
+</head>
+
+<!-- body 실제로 웹문서에서 해당 내용을 표현하는 곳 -->
+
+<!--[HTML 완성] 1단원-5~8-->
+
+<body>
+    <h1><b>240214 summarizing</b></h1>
+    <br>
+    <h1><b>1. h, b, margin</b></h1>
+    <h1>W3C</h1>
+    <h1>This is heading 1</h1>
+    <h2>This is heading 2</h2>
+    <h3>This is heading 3</h3>
+    <h4>This is heading 4</h4>
+    <h5>This is heading 5</h5>
+    <h6>This is heading 6</h6>
+
+    <b> bold b </b><br>
+    <b> bold b </b>
+
+    <h1 style="margin-top: 40px;">Hypertext</h1>
+    Hypertext Markup Language(HTML) is the standard markup language for <strong>creating
+        <u>web</u> pages</strong> and web applications
+    <br>
+
+    <span style="font-size: 24px;">coding</span>
+    <h3>coding</h3>
+
+    <h1 style="margin-top: 60px;"><b>2. add image sample</b></h1>
+    <!--[HTML 완성] 1단원-9 : img 태그
+    사진은 가로나 세로 사이즈를 정해주면 나머지는 알아서 조절됨-->
+    <img src="sources/240214 sample.jpg" width="300px">
+
+
+    <h1 style="margin-top: 60px;"><b>3. list</b></h2>
+        <!--[HTML 완성] 1단원-10 : 부모 자식과 목록
+    ol : 순서가 있음
+    ul : 순서가 없음-->
+        <ol>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+        </ol>
+        <ul>
+            <li>JAVA</li>
+            <li>JSP</li>
+            <li>Spring</li>
+        </ul>
+
+        <h1 style="margin-top: 60px;"><b>4. a : hyperlink</b></h2>
+            <!-- [HTML 완성] 1단원-12 : HTML 태그의 제왕
+    anchor의 첫 글자를 딴 'a' -->
+            <!-- HTML의 사용설명서 검색어 : html specification -->
+            <!-- 검색어 2 : html a 설명서 -->
+            <a href="https://www.naver.com" target="_blank" title="툴팁확인">네이버 바로가기</a>
+            <br>
+            <a href="https://blog.naver.com/yu_cheong_" target="_blank">내 블로그 바로가기</a>
+
+            <h1 style="margin-top: 60px;"><b>5. making a website</b></h1>
+            <!-- [HTML 완성] 1단원-13: 웹사이트 완성 -->
+            <h1><a href="sources/240214 index.html" target="_blank">WEB</a></h1>
+
+            <h2>깃허브 -> netlify 웹 사이트 만들기</h2>
+            <ol>
+                *편법
+                <li>새 repository를 만든다.</li>
+                <li>repository에 add file -> upload files 선택 후 웹 사이트 코딩한 파일 전부 업로드하기.</li>
+                <li>netlify 접속</li>
+                <li>사이드 메뉴에 Sites 선택, Add new site-Import an existing project 선택</li>
+                <li>Deploy with GitHub - 해당 프로젝트 선택</li>
+                <li>Deploy [프로젝트명] 클릭, 완료.</li>
+            </ol>
+            *사이트 이름 변경은 Sites configuration 클릭
+
+            <h1 style="margin-top: 60px;">태그 정리</h1>
+            *괄호 생략<br>
+            <ul>
+                <li>link rel="stylesheet" href="css/poster.css"</li>
+                <!-- css 작업시 , css 파일 분리해서 작업을 많이 함. 이유 : 유지보수 편함 -->
+                <!-- css 파일과 연결 시키는 코드 -->
+                <!-- 현재 해당 프로젝트에 저장이 되어 있는 파일을 사용하지만, cdn을 이용해서, 인터넷을 통해서 다운로드 받습니다.  -->
+
+                <li>img src="images/tangerines.jpg" alt="레드향"</li>
+                <!-- 상대 경로로 해당 이미지 파일에 접근을 시도 했음. 
+                    현재 파일: audio-1.html, 같은 위치에 images 폴더에 바로 접근했음. -->
+
+                <li>audio src="medias/spring.mp3" controls /audio</li>
+                <!-- 음원 파일을 불러오는 역할이고, 해당 위치를 불러오는 방식은 상대 경로로 불러오고 있음.  -->
+                <!-- 절대 경로 : C:\Users\it\Documents\WEB\doit-source-sample-code\04\medias\spring.mp3 -->
+                <!-- 현재, 라이브 서버가 동작을 하고 있어서, 루트 디렉토리가, WEB:  /
+                    그 아래에 : /doit-source-sample-code -->
+                <!-- controls 속성은 : 상태 조절하는 바, 막대, 플레이, 중지, 리모컨으로 보면 됨. -->
+                <li>table</li>
+                <!-- 웹 문서에 표를 작성할 때 사용하는 태그 : table -->
+                <li>caption</li>
+                <!-- caption 속석은 제목으로 보셔도 됨.  -->
+                <li>colgroup</li>
+                <!-- 행, 열을 묶을 때 사용하는 그룹 : colgroup -->
+                <li>span</li>
+                <!-- 1열, 2열 특정 2개의 열을 합칠 때 사용하는 속성. -->
+                <!-- span 속성을 사용해 합치기 전
+                <col style="width:150px">
+                <col style="width:150px">-->
+                <br>
+                <li>thead</li>
+                <!-- 표의 제목을 의미하는 , 2줄로 표시 되고, 가운데 정렬이 기본으로 되어 있는 속성.  -->
+                <li>tr</li>
+                <!-- tr : 하나의 행을 의미를 하고,  -->
+                <li>td</li>
+                <!-- td : 각 열을 의미-->
+                <li>th</li>
+                <!-- td : 각 열을 의미, th : 각 열의 제목을 의미, 2줄이고, 자동으로 가운데 정렬이 됨.  -->
+                <li>tbody</li>
+                <!-- 표의 각 컬럼을 제외하고, 실제 본문의 내용이라 보면 됨.  -->
+                <li>dl</li>
+                <!-- 데이터 리스트, 들여쓰기를 적용해서, 목록형식 출력 -->
+                <!-- 소제목 -->
+                <li>dt</li>
+                <!-- 들여쓰기해서 보여지는 내용 -->
+                <li>body</li>
+                <!-- 웹 브라우저에서, 특정 파일 형식을 지원할 때,
+  특정 태그가 어느 브라우저에서 사용이 되는지 여부를 확인 
+  can i use 라는 사이트에서 확인을 합니다. 띄워쓰기 일부러 했음. 
+  브라우저 적용 여부가 조금씩 다릅니다.  -->
+            </ul>
+            <form>
+                <!-- form 태그를 이용해서 
+                    프론트(화면상에서) 사용자로 부터 데이터를 입력을 받아서, 
+                서버로 전달시 많이 사용하는 형태의 태그 
+                주로 예) 텍스트, 이미지, 한개 또는 여러 개 보내게 될 예정.  
+                종류:
+                text, password, search, url, email, tel, checkbox, radio , number,
+                range, date, month, week, time, datetime, datetime-local , 
+                submit, reset , image , button , file, hidden 
+                속성 : 
+                autofocus, placeholder, readonly, required, max, min, 
+                step, maxlength , minlength, size , list -->
+                <input type="button" value="공지 창 열기" onclick="window.open('notice.html')">
+                <br>
+                <input type="text" value="text">
+                <br>
+                <input type="password" value="password">
+                <br>
+                <input type="search" value="search">
+                <br>
+                <input type="url" value="url">
+                <br>
+                <input type="email" value="email">
+                <br>
+                <input type="tel" value="tel">
+                <br>
+                <input type="checkbox" value="checkbox">
+                <br>
+                <input type="radio" value="radio">
+                <br>
+                <input type="range" value="range">
+                <br>
+                <input type="date" value="date">
+                <br>
+                <input type="month" value="month">
+                <br>
+                <input type="week" value="week">
+                <br>
+                <input type="time" value="time">
+                <br>
+                <input type="datetime" value="datetime">
+                <br>
+                <input type="datetime-local" value="datetime-local">
+                <br>
+                <input type="submit" value="submit">
+                <br>
+                <input type="reset" value="reset">
+                <br>
+                <input type="image" value="image">
+                <br>
+                <input type="file" value="file">
+                <br>
+                <input type="hidden" value="hidden">
+            </form>
+</body>
+
+</html>

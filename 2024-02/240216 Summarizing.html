@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>240216</title>
+    <style>
+        h3 {
+            margin-left: 20px;
+        }
+
+        ul {
+            margin: 0px;
+        }
+
+        li {
+            height: 23.5px;
+        }
+
+        #grid {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>1. mediaquery</h1>
+    <p>WEb/강의/2 css/mediaquery.html</p>
+    <!-- 모바일 , 태블릿, 랩탑, 워치, 기종별 사이즈 
+        https://yesviz.com/devices.php -->
+
+    <br>
+    <br>
+    <br>
+
+    <h1>2. Java Script Basic</h1>
+    <p>객체 : 수납도구<br>
+        . : dot연산자, 하위로 연결하는 구분자처럼 사용<br>
+    </p>
+
+    <br>
+    <br>
+    <br>
+
+    <h1>3. h1과 document의 차이</h1>
+    <p>• h1 : 문자 그대로 반영</p>
+    <h5>1+1</h5>
+
+    <p>• document.write(1 + 1); : 1+1을 계산</p>
+    <script>
+        document.write(1 + 1);
+    </script>
+
+    <br>
+    <br>
+    <br>
+
+    <h1>4. js개요</h1>
+
+    <p>• document.write('hello world');</p>
+    <script>
+        document.write('hello world');
+    </script>
+
+    <!-- 1. 간단한 버튼 하나 추가, onclick 이벤트 적용
+    -> 특정 요소의 색깔 변경 / 기본적인 클래스, 객체, 조건문, 반복문, 변수 등
+      4개의 문서에 적용해 보기 -->
+
+    <br>
+    <br>
+    <br>
+
+    <h1>5. 버튼 이벤트 확인</h1>
+    <p>• 버튼만</p>
+    <input type="button" value="hi">
+
+    <br>
+    <br>
+
+    <p>• 버튼 + onclick="alert('hi')"</p>
+    <input type="button" value="hi" onclick="alert('hi')">
+
+    <br>
+    <br>
+
+    <p>• 버튼 + onchange="alert('changed')"</p>
+    <input type="text" onchange="alert('changed')">
+    <p>-> alert('changed')의 값을 가져옴</p>
+
+    <br>
+
+    <!-- 계획
+      1. 입력란에 입력된 내용을 가지고 오는 방법 모색. 
+      예) document.getElementById('blogName')
+      2. 가지고 온 내용을 특정 변수에 담기. 
+      3. 버튼을 클릭시 해당 변수를 사용하는 방법 모색.  -->
+
+    <p>• 버튼 + 입력한 텍스트를 alert으로 띄우기</p>
+
+    <input type="text" id="change_text_input">
+    <input type="button" value="변경글자 alert로 띄우기" id="change_text_btn" onclick="printMessage()">
+
+    <br>
+    <br>
+
+    <!-- 1단계, 이메일을 먼저 입력받고, 출력해보기. 
+      2단계, 따로 패스워드를 입력받고, 따로 출력해보기. 
+      3단계, 한번에 2개를 다 출력해보기.  -->
+
+    <p>• 이메일/패스워드 입력 버튼 -> 화면에 출력</p>
+    <input type="text" id="email" placeholder="이메일">
+    <br>
+    <input type="password" id="pw" placeholder="패스워드">
+    <input type="button" value="login" onclick="printinfo()">
+
+    <br>
+    <br>
+
+    <!-- 연습해보기. 
+      간단한 회원가입 폼 
+      1. 이메일 
+      2. 패스워드 
+      3. 확인용 패스워드 
+      4. 이름 
+      5. 전화번호 
+      결과는 alert 경고창에 보여주기.  -->
+
+    <p>• 간단한 회원가입 폼</p>
+    <h3>회원가입</h3>
+    <div id="grid">
+        <ul>
+            <li>이메일 :</li>
+            <li>패스워드 :</li>
+            <li>패스워드확인 :</li>
+            <li>이름 :</li>
+            <li>전화번호 :</li>
+        </ul>
+
+        <div>
+            <input type="text" id="e" placeholder="이메일">
+            <br>
+            <input type="text" id="p" placeholder="패스워드">
+            <br>
+            <input type="text" id="p2" placeholder="패스워드확인">
+            <br>
+            <input type="text" id="name" placeholder="이름">
+            <br>
+            <input type="text" id="tel" placeholder="010-0000-0000">
+            <br><br>
+            <input type="button" value="Sign Up" onclick="printuserinfo()">
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <p>• 야간모드로 바꾸기</p>
+    <input type="button" value="night" onclick="
+        document.querySelector('body').style.backgroundColor = 'black';
+        document.querySelector('body').style.color = 'white';">
+
+    <input type="button" value="day" onclick="
+        document.querySelector('body').style.backgroundColor = 'white';
+        document.querySelector('body').style.color = 'black';">
+
+    <br>
+    <br>
+
+    <p>• onkeydown 단순 소개(실사용은 이렇게 x)</p>
+    <input type="text" onkeydown="alert('key down')">
+    <p>- 공식 문서에 deprecated 지원을 안해서 참고용으로만</p>
+
+    <br>
+    <br>
+
+
+
+
+    <script>
+        // input에서 입력된 값 가져와서, alert 출력해보기.
+        // 함수를 만들어서 사용
+        function printMessage() {
+            var message = document.getElementById('change_text_input').value
+            alert(message)
+        }
+
+        function printinfo() {
+            var email = document.getElementById('email').value
+            var pw = document.getElementById('pw').value
+            var info = "email : " + email + " / pw : " + pw
+            alert(info)
+        }
+
+        // 문자열을 연결하는 연산자, "+" 
+
+        function printuserinfo() {
+            var e = document.getElementById('e').value
+            var p = document.getElementById('p').value
+            var p2 = document.getElementById('p2').value
+            var name = document.getElementById('name').value
+            var tel = document.getElementById('tel').value
+            var userinfo
+                = "회원가입 감사합니다. (" + "email : " + e
+                + " / pw : " + p
+                + " / pw : " + p2
+                + " / name : " + name
+                + " / tel : " + tel + ")"
+            alert(userinfo)
+    </script>
+
+    <!-- 콘솔 출력해보기
+     실제로 입력된 값이 제대로 들어 왔는지 확인용
+     ****** 매우 많이 사용함 / 매우 중요
+
+     console.log(userinfo)
+     } -->
+
+
+
+    <!-- 문자열 기능, 내장 기능, 기본 클래스 , 여러가지 표현이 있는데,
+     그만큼 자주 많이 사용되는 기능이다.
+     예) 이미지 파일 ,
+     abc.png , def.mp4 -> 파일명: 문자열로 다 구성이됨.
+     0123456
+     특정의 요소를 선택하기. -->
+
+
+
+    <!-- 자바스크립트에서 데이터 타입에 대해서 이야기를 하는데.
+     동적 타이핑라는게 뭐냐면,.
+     예) var a = "abc"
+     타입스크립트, -> 문자열, 타입을 명시 표시.
+
+     자바 데이터 타입,
+     예) int a = 3, string str = "123"
+     동적 타이핑을 지원 하기 시작함. -->
+
+
+
+
+</body>
+
+</html>

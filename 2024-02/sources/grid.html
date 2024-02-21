@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div {
+            border: 5px solid gray;
+        }
+
+        #grid {
+            border: 5px solid pink;
+            display: grid;
+            /* 요소를 배치할 때 특정의 비율로 배치 하기 위한 방법 */
+            grid-template-columns: 1fr 2fr 2fr;
+            /* 해당 컬럼 배치 시, 크기의 비율을 설정하는 속성 */
+            /* 화면을 늘려보면 ARTICLE 영역은 자동으로 커지고 
+            NAVIGATION 영역은 150px 을 고정적으로 차지.
+            여기서 1fr이 무엇인지 확인 해보기. 
+            150px 대신 1fr 로 하면 두 칼럼은 같은 크기가 됨. 
+
+            grid-template-columns: 1fr 1fr;
+
+            그리고 첫 번째 칼럼을 2fr로 바꾸면 화면 전체를 3fr이라고 했을 때, 
+            NAVIGATION 영역은 2만큼, ARTICLE 영역은 1만큼 화면 전체를 나눠서 쓰게 됨.  */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="grid">
+        <div>NAVIGATION</div>
+        <div>ARTICLE</div>
+        <div>backlight</div>
+
+    </div>
+</body>
+
+</html>

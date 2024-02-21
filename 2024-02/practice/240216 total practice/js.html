@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        /* 6-4 #grid 지정 */
+        #grid {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+        }
+
+        /* 6-5 보기 알맞게 서식 지정 */
+        #grid ul {
+            margin: 0px;
+        }
+
+        #grid li {
+            height: 33px;
+        }
+        input {
+            margin-bottom: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <p>1. 버튼만</p>
+    <input type="button" value="버튼">
+    <br>
+
+    <p>2. 버튼 + onclick="alert('hi')"</p>
+    <input type="button" value="버튼" onclick="alert('hi')">
+    <br>
+
+    <p>3. 버튼 + onchange="alert('changed')"</p>
+    <input type="text" onchange="alert('changed')">
+    <br>
+
+    <p>4. 버튼 + 입력한 텍스트를 alert으로 띄우기</p>
+    <!-- 4-1. 화면(입력칸 만들어주기) -->
+    <input type="text" id="text">
+    <input type="button" value="입력" id="text input" onclick="printmes()">
+    <!-- 여기서printmes는 내가 만드는 js 함수임 <script>에 넣어서 만들어야 함 -->
+
+
+    <p>5. 4를 활용하여 간단한 회원가입 폼 만들기</p>
+    <!-- 5-1 화면 만들기 -->
+    <!-- 6. 회원가입 폼 grid 지정하기 -->
+    <!-- 6-1 모든 요소 만들어주기 <li></li> -->
+    <div id="grid">
+        <!-- 6-2 div id="grid" 지정해주기 -->
+        <!-- 6-3 서식 지정하기 <style>사용 -->
+        <ul>
+            <li>이메일 :</li>
+            <li>비밀번호 : </li>
+            <li>비밀번호 확인 :</li>
+            <li>이름 :</li>
+            <li>전화번호 :</li>
+        </ul>
+
+        <div>
+            <input type="text" id="email" placeholder="email">
+            <br>
+            <input type="text" id="pw" placeholder="password">
+            <br>
+            <input type="text" id="confirm pw" placeholder="confirm password">
+            <br>
+            <input type="text" id="name" placeholder="full name">
+            <br>
+            <input type="text" id="tel" placeholder="tel">
+            <br>
+            <input type="button" value="sign up" id="signup" onclick="printinfo()">
+        </div>
+    </div>
+
+    <script>
+        // 4-2 printmes 함수 만들어주기
+        function printmes() {
+            var message = document.getElementById('text').value
+            // 4-3 변수 message = document.getElementById('text').의 값
+            alert(message)
+            // 4-4 변수 message를 경고창으로 띄워라
+        }
+
+        // 5-2 printinfo 함수 만들어주기
+        function printinfo() {
+            var email = document.getElementById('email').value
+            var pw = document.getElementById('pw').value
+            var pw2 = document.getElementById('confirm pw').value
+            var name = document.getElementById('name').value
+            var tel = document.getElementById('tel').value
+            // 5-3 모든 id에 대해 변수를 지정한 후
+            var userinfo =
+                ("email :" + email + " / pw :" + pw + " / name :" + name + " / tel :" + tel)
+            // 5-4 하나의 변수로 모두 합쳐준다
+            alert(userinfo)
+
+        }
+
+    </script>
+
+</body>
+
+</html>

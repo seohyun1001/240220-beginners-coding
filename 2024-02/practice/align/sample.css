@@ -1,0 +1,141 @@
+/* css 파일 안에서는 <style> 태그 사용하면 안 됨*/
+
+/* a {
+    color: black; */
+    /* 글자 폰트 색 */
+
+    /* text-decoration: none; */
+    /* 텍스트의 언더라인을 제거하는 효과 */
+
+    /* font-size: 30px; */
+
+    /* text-align: center; */
+    /* 텍스트 정렬 */
+/* } */
+
+h1 {
+    border-color: #000000;
+    border-bottom: 3px solid;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    align-items: center;
+    margin: 0px;
+    text-align: center;
+}
+
+/* align-items / text-align 다름! */
+
+ol {
+    border-right: 1px solid gray;
+    margin:0px;
+    padding-top: 15px;
+    width: 100px;
+}
+
+/* 만약, #grid ol{} -> 이라고 하면 id="grid" 하위요소의 ol을 말함 */
+
+body{
+    margin: 0;
+}
+
+.saw {
+    color: gray;
+}
+
+/* class의 요소를 가져올 때는 .을 붙이고 가져온다 */
+/* *중요
+    css 특정 요소들을 그룹화 할 때 사용하는 기법
+    ex) class="saw"
+    해당 클래스에 속한 요소는 css 적용하기 쉬움
+    클래스에 접근시에는 ".saw", 클래스 이름 앞에 점을 붙이기 */
+
+#active {
+    color: red;
+}
+
+/* id : 유일한 요소를 지정할 때 사용
+    css 표기 시에는 #active */
+
+/* css에서는 마지막에 오는 요소가 우선순위가 높다 */
+/* 우선순위 : id 선택자 > 클래스 선택자 > 태그 선택자  */
+
+
+
+/* h1 {
+    border-width: 5px;
+    border-color: pink;
+    border-style: solid;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  } */
+/* 폭 : width 
+    높이 : height 
+    콘텐츠와 테두리 사이의 간격은 : padding 
+    테두리와 테두리 사이의 간격 : margin  */
+/* display: block;
+    width: 100px; */
+/* display: inline; */
+/* -> 원래 block element였으나 강제로 inline으로 바꿈 */
+
+/* a {
+    border-width: 5px;
+    border-color: rgb(46, 46, 255);
+    border-style: solid;
+  } */
+
+/* * 같은 내용일 경우 -> 코드 중복제거 refactoring 
+    즉, 선택자에서 ‘,’ 라는 선택자를 통해 코드의 양을 획기적으로 줄일 수 있음. */
+/* 예)
+<style>
+    h1 , a {
+      border-width: 5px;
+      border-color: red;
+      border-style: solid;
+    }
+</style> */
+/* * h1, a : 모든 h1 요소와 a 요소를 모두 선택 */
+
+
+/* *** grid (WEB/2024-02/sources/grid.html 확인) */
+
+/* 1. div로 그리드 설정 및, 구역 나눔(html 문서에서 해야 함)
+    : grid로 설정할 구역 전체, 그리고  그 안에서 자리를 이동시킬 부분을 div로 지정해 준다
+    <div id="grid">
+        <div>
+        </div>
+    </div> */
+
+/* 2. 서식 적용 */
+/* div {
+    border-right: 5px solid rgb(0, 0, 0);
+    } */
+
+#grid{
+    display: grid;
+    grid-template-columns: 150px 1fr;
+}
+
+/* grid : 요소를 배치할 때 특정의 비율로 배치 하기 위한 방법 */
+/* grid-template-columns : 해당 컬럼 배치 시, 크기의 비율을 설정하는 속성 */
+/* 화면을 늘려보면 ARTICLE 영역은 자동으로 커지고 
+    NAVIGATION 영역은 150px 을 고정적으로 차지.
+    여기서 1fr이 무엇인지 확인 해보기. 
+    fr = fraction(부분) -> 비율에 맞춰 반응형으로 반응함
+    ex) 개체 2개 -> 1fr 2fr / 이면 개체가 1:2 크기를 유지함
+    개체 개수만큼 설정해줘야 함
+    150px 대신 1fr 로 하면 두 칼럼은 같은 크기가 됨. 
+
+    grid-template-columns: 1fr 1fr;
+
+    그리고 첫 번째 칼럼을 2fr로 바꾸면 화면 전체를 3fr이라고 했을 때, 
+    NAVIGATION 영역은 2만큼, ARTICLE 영역은 1만큼 화면 전체를 나눠서 쓰게 됨.  */
+
+/* ☆★☆★☆ grid-template-columns -> 개체 간의 margin-border-padding 을 고려하여 설정해야 함 */
+
+/* <body>
+    <div id="grid">
+        <div>NAVIGATION</div>
+        <div>ARTICLE</div>
+        <div>backlight</div>
+    </div>
+</body> */

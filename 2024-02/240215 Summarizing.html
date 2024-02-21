@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>240215</title>
+</head>
+
+<body>
+    <h1>240215 Summarizing</h1>
+
+    <h1>1. label / radio - name</h1>
+    <h3>- name x</h3>
+    <li><label><input type="radio" value="yes">o</label></li>
+    <li><label><input type="radio" value="no">x</label></li>
+    <!-- 주의 사항, 라디오 타입에서, name 속성으로 같은 이름으로 그룹 지어주기. -->
+    <h3>- name o</h3>
+    <li><label><input type="radio" name="test" value="yes">o</label></li>
+    <li><label><input type="radio" name="test" value="no">x</label></li>
+    <!-- <li><label><input type="radio" name="gift" value="yes" >선물 포장</label></li>
+          <li><label><input type="radio" name="gift" value="no">선물 포장 안 함</label></li> -->
+
+    <br>
+
+    <h1>2. img / input file</h1>
+    <h3>- img src를 사용하여 이미지 삽입하기</h3>
+    <img src="sources/salad.jpg" width="320">
+    <!-- 출력용으로 사용하는 태그  img , alt , 이미지 설명. 
+        서버로 전달용. 
+    앞단 -> 뒷단 , 이미지 를 넘길 때(전송), input="file" -->
+    <br>
+    <h3>- input type을 사용하여 이미지 삽입하기</h3>
+    <input type="image" value="image" src="sources/240214 sample.jpg" width="300px">
+    <!-- 이미지를 전송할 때 사용하는 , 인풋 타입. -->
+
+    <br>
+
+    <h1>3. input - name</h1>
+    <h3>- input type=number name 사용</h3>
+    <!-- <input type="number" min="0" max="5">개 <small>(최대 5개)</small><br> -->
+    <input type="number" name="s_3_p" min="0" max="5">개 <small>(최대 5개)</small>
+    <!-- 화면상에서 입력된 내용을 , 서버로 전달하는 2번째 방법. 
+          해당 input 태그의 name의 값을 이용해서 서버로 전달한다.
+          ex) 서버 입장에서, name = s_3_p 의 값을 가져오는 형식   -->
+    <br>
+    <!-- <input type="number" min="0" max="3" value="1">개 <small>(최대 3개)</small> -->
+    <input type="number" name="s_5_p" min="0" max="3" value="1">개 <small>(최대 3개)</small>
+
+    <br>
+
+    <h1>4. Label - for / input - id</h1>
+    <h3>- label x</h3>
+    배송주소 : <input type="text" id="addr">
+    <br>
+    <h3>- label o</h3>
+    <label for="addr">배송 주소</label>
+    <input type="text" id="addr">
+    <!-- <label>을 <input>요소와 연결하면 몇 가지 이점이 있다 : -->
+    <!-- label 텍스트는 텍스트 입력과 시각적으로 관련이 있을뿐만 아니라
+        프로그래밍적으로도 관련이 있다. 예를 들어, 화면리더기(screenreader)는
+        폼 입력(form input)에서 label 을 읽어서 보조기술(assistive technology)
+        사용자가 입력해야하는 텍스트가 무엇인지 더 쉽게 이해할 수 있게 한다. -->
+    <!-- 관련 label 을 클릭해서 input 자체에 초점을 맞추거나 활성화를 시킬 수 있다.
+        (활성되어서)늘어난 누를 수 있는 영역(hit area)은 터치스크린 사용자를 포함해
+        입력하려하는 모든 사람에게 이점을 준다. -->
+
+    <br>
+
+    <h1>5. hidden</h1>
+    <input type="hidden" name="url" id="url" value="사이트를 통한 직접 로그인">
+    <!-- 사용 용도는, 사용자에게 보여주기 싫은 정보를 말함. 
+      예) 게시판, 해당 게시글의 상세페이지를 조회를 할려면, 해당 게시글의 아이디를 서버에게 
+      알려주어야 함. 그 때, 사용자는 게시판 아이디를 알 필요가 없음. 
+      서버만 필요한 정보를 전달시, 숨겨서 전달함.  -->
+    <!-- 최소 jsp 이후로, 예제를 보게 될 예정 -->
+
+    <br>
+
+    <h1>6. placeholder</h1>
+    <li>
+        <!-- placeholder 사용자에게 무엇을 하는지를 알려주는 힌트 -->
+        <label for="phone">연락처</label>
+        <input type="tel" id="phone" placeholder="하이픈 빼고 입력해 주세요.(01012345678)" required>
+    </li>
+
+    <br>
+
+    <h1>7. select</h1>
+    <!-- 스핀 박스에서 , 특정의 값을 선택하는 태그이고, 
+        기본값으로 선택하는 속성. selected -->
+    <label>
+        <!-- 스핀 박스에서 , 특정의 값을 선택하는 태그이고, 
+        기본값으로 선택하는 속성. selected -->
+        <select>
+            <option value="special_3" selected>선물용 3kg</option>
+            <option value="special_5">선물용 5kg</option>
+            <option value="family_3">가정용 3kg</option>
+            <option value="family_5">가정용 5kg</option>
+        </select>
+    </label>
+
+
+    <br>
+    <br>
+    <br>
+
+    <h1>8. css basic</h1>
+    <p>:1. 아래 링크 및 sources의 style.css 확인</p>
+    <li><a href="sources/240214 2 css.html">CSS</a></li>
+    <p>:2. 아래 링크 및 sources의 grid.html 확인</p>
+    <li><a href="../강의/2 CSS/240215 test.html">CSS test</a></li>
+    <li><a href="../강의/2 CSS/240215 box.html">CSS box</a></li>
+
+</body>
+
+</html>

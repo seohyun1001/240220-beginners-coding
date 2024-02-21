@@ -1,0 +1,84 @@
+/* <link rel="stylesheet" href="./style.css"> */
+
+/* 1. a(하이퍼링크) 서식 지정하기 */
+a {
+    color: crimson;
+}
+
+
+/* 2. 본 문서는 다른 색깔로 표시하기 */
+/* 2-1 먼저 html 문서에서 class로 saw를 설정해줘야 함 */
+/* <h1><a href="index.html" class="saw">WEB</a></h1> */
+/* 2-2 class의 요소는 .으로 표시해서 서식 지정 */
+.saw {
+    color: gray;
+}
+
+
+/* 3. 현재 머물고 있는 문서 다른 색깔로 표시하기 */
+/* 3-1 먼저 html 문서에서 id로 active를 설정해줘야 함 */
+/* <li><a href="3 javaScript.html" class="saw" id="active">JavaScript</a></li> */
+/* 3-2 id의 요소는 #으로 표시해서 서식 지정 */
+#active {
+    color: darkblue;
+}
+
+/* *** 서식 지정 우선순위 : id 선택자 > 클래스 선택자 > 태그 선택자(뒤로 갈수록 우선순위 높음) */
+
+
+/* 4. grid 지정하기 */
+/* 4-1 먼저 html 문서에서 div id=grid 설정하기 */
+/* 4-2 grid 서식 지정 */
+
+#grid {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+}
+
+h1 {
+    text-align: center;
+    border-bottom: 3px solid black;
+    padding: 10px;
+    margin: 0px;
+}
+
+#grid ol {
+    /* grid 안에 ol 개체 */
+    margin: 0px;
+    padding-top: 20px;
+    border-right: 1px solid black;
+}
+
+#grid div {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+body {
+    margin: 0px;
+}
+
+
+/* 5. 미디어 쿼리 지정하기 */
+/* 5-1 화면이 줄어듦에 따라 body 요소들 재배치하기 */
+/* 미디어 쿼리 사용법 : @media(조건){서식} */
+@media(max-width :800px) {
+    #grid {
+        display: block;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    /* a. 화면 가로 너비가 800px 보다 작을 때 grid 영역의 display 속성을 block으로 변경하기 */
+    /* -> 이러면 ol - div 가 병렬 구조에서 수직 구조로 바뀐다 */
+
+#grid ol {
+    border-right: none;
+    border-bottom: 1px dotted black;
+    padding-bottom: 20px;
+}
+
+body {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+}

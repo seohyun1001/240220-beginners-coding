@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        h3 {
+            margin-left: 20px;
+        }
+
+        ul {
+            margin: 0px;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        #grid {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>회원가입</h3>
+    <div id="grid">
+        <ul>
+            <li>이메일 :</li>
+            <li>패스워드 :</li>
+            <li>패스워드확인 :</li>
+            <li>이름 :</li>
+            <li>전화번호</li>
+        </ul>
+
+        <div>
+            <input type="text" id="e" placeholder="이메일">
+            <br>
+
+            <input type="password" id="p" placeholder="패스워드">
+            <br>
+
+            <input type="password" id="p2" placeholder="패스워드확인">
+            <br>
+
+            <input type="text" id="name" placeholder="이름">
+            <br>
+
+            <input type="text" id="tel" placeholder="010-0000-0000">
+            <br>
+            <input type="button" value="Sign Up" onclick="printuserinfo()">
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <script>
+        function printuserinfo() {
+            var e = document.getElementById('e').value
+            var p = document.getElementById('p').value
+            var p2 = document.getElementById('p2').value
+            var name = document.getElementById('name').value
+            var tel = document.getElementById('tel').value
+            var userinfo
+                = 감사합니다.
+                + "email : " + e
+                + " / pw : " + p
+                + " / pw : " + p2
+                + " / name : " + name
+                + " / tel : " + tel
+            alert(userinfo)
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
