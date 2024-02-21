@@ -33,7 +33,7 @@
             <!-- 함수를 사용한다. 같은 말로, 함수를 호출한다. 
             이 때, 여기 소괄호안에 있는 것을 뭐라고 부른다고 하냐면, 인자값(arguement)
 
-            함수를 정의를 한다. 함수를 정의할 때, 
+            함수를 정의를한다. 함수를 정의할 때, 
             function changeColorTest(self),
             함수 이름 변경. : nightDayHandler
             정의시 사용이 되는 소괄호안에 호칭, 파라미터부름.(parameter) -->
@@ -51,92 +51,10 @@
             </p>
         </div>
     </div>
-
     <script>
-        function nightDayHandler(self) {
-            var target = document.querySelector('body');
-            if (self.value === 'night') {
-                // 이 부분을 함수로 변경, 재사용 해보기
-                // body 태그의 글자색, 배경색을 변경하는 코드
-                // 기존에는 부분 ㅈ우복되는 부분을 target으로 변수에 할당하여 리팩토링,
-                // 지금은 함수를 이용
-                // 1. target.style.backgroundColor = 'black' ->;
-                // 2. BodySetBackgroudSetColor('black')
-                body.setBackgroundColor('white')
-                // 1. target.style.color = 'white' ->;
-                // 2. BodySetColor('white')
-                body.setColor('black')
-                self.value = 'day'
-                // setColor('red')
-
-                Links.setColor('coral')
-            } else {
-                // 1. target.style.backgroundColor = 'white';
-                // 2. BodySetBackgroudSetColor('white')
-                Body.setBackgroundColor('black')
-                // 1. target.style.color = 'black';
-                // 2. BodySetColor('black')
-                Body.setColor('white')
-                self.value = 'night'
-                // setColor('blue')
-                Links.setColor('aquamarine')
-            }
-        }
-
-
-        function setColor(color) {
-            // 필기에는 함수명을 LinksSetColor로 함
-            // 전체 단축키 : ctrl + h
-            var alist = document.querySelectorAll('a');
-            var i = 0;
-            while (i < alist.length) {
-                alist[i].style.color = color;
-                console.log(alist[i]);
-                i = i + 1;
-            }
-        }
-
-        // body 태그 하위에 글자색을 변경하는 함수
-        // 주의사항 : 함수를 사용시 인자값으로 문자열 타입으로 사용하기
-        function BodySetColor(color) {
-            document.querySelector('body').style.color = color;
-        }
-
-        // body 태그 하위에 배경색을 변경하는 함수
-        function BodySetBackgroudSetColor(color) {
-            document.querySelector('body').style.backgroundColor = color;
-        }
-
-        // body라는 이름의 객체 형태
-        // 객체 안에 , 속성으로 익명 함수를 이용하고 있다.
-        // 키 : setColor
-        // 값 : function ~ 문장
-        var Body = {
-            setColor: function (color) {
-                document.querySelector('Body').style.color = color;
-            }
-            ,
-            setBackgroundColor: function (color) {
-                document.querySelector('Body').style.backgroundColor = color;
-            }
-        }
-
-
-        // 기본에 a 태그 4개 선택해서, 색 변경하는 기능을 객체 함수로 담기
-        // 키 : setColor
-        // 값 : function ~ 문장
-        var Links = {
-            setColor: function (color) {
-                var alist = document.querySelector('a');
-                var i = 0;
-                while (i < alist.length) {
-                    alist[i].style.color = color;
-                    i = i + 1;
-                }
-            }
-        }
-
+        
     </script>
+    <script src="js/color.js"></script>
 </body>
 
 </html>
