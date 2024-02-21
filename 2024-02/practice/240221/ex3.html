@@ -1,11 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+
+    <script>
+        // 간단한 자바 스크립트(바닐라:기본)
+        function sum(left, right) {
+            // document.write(left + right + '<br>');
+            return left + right
+            // return은 계산 결과를 반환해주고 화면에 표시는 안 해줌.
+        }
+
+        // 주의사항 : 문자열 표기시 -> 작은 따옴표('') or 큰 따옴표("")
+                // 안에 작성하고, 문자열 내부에 또 문자열이 온다면
+                // 예) "  '안에는 작은 따옴표'  "
+                // 예2) '  "안에는 큰 따옴표"  '
+        function sumColorRed(left, right) {
+            // 사칙 연산에서 +(더하기) 차례대로 진행이 되는데,
+            // 문자열을 먼저 + 사용 시, 이때는 자동적으로 연결 연산자로 사용이 됨.
+            // 따라서 숫자도 형태가 자동 변환 되어 문자열로 변환됨.
+            // 그래서 sum 함수를 넣어 100 + 200을 계산시킨 것.
+            // document.write('<div style="color: red;">' + '<h1>' + left + right + '</h1>' + '</div><br>');
+            document.write('<div style="color: red;">' + '<h1>' + sum(left, right) + '</h1>' + '</div><br>');
+        }
+
+        sum(2, 3);
+        sumColorRed(100, 200);
+        sum(3, 4);
+    </script>
 </body>
+
 </html>
