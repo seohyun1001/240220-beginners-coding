@@ -18,6 +18,7 @@
             <li><a href="3 javaScript.html">JavaScript</a></li>
         </ol>
         <div id="article">
+            <!-- 방법 1. 함수 없이 alist while if 사용
             <input type="button" id="changeColorBtn" value="night" onclick="
     var target = document.querySelector('body');
     // 원래  document.querySelector('body')를 if문에 다 적어줘야 했으나,
@@ -56,7 +57,19 @@
             console.log(alist[i]);
             i = i + 1;
         }
-    }">
+    }"> -->
+
+    <!-- 방법 2. changeColorTest() 함수 만들기 -->
+    <input type="button" id="changeColorBtn" value="night"
+    onclick="changeColorTest(this)">
+    <!-- this는 input을 가리키고 있음
+    여기서는 함수를 사용하게 되면서 this가 changeColorTest함수를 가리키게 해야 함.
+    따라서 함수의 인자값(괄호 안의 값)으로 this를 지정해줘야 함
+    하는 순서
+    1. 함수를 호출한다. : onclick="changeColorTest(this)"
+    2. 함수를 정의한 곳으로 이동한다.
+    3. 함수를 정의한 곳에서 self라는 변수를 넣어주고, this를 self로 바꿔준다.
+    -> self라는 변수에 this를 할당하게 됨 -->
             <h2>CSS란 무엇인가?</h2>
             <p style="margin-top: 40px;">
                 Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation
@@ -70,6 +83,38 @@
             </p>
         </div>
     </div>
+
+    <script>
+        function changeColorTest(self) {
+            var target = document.querySelector('body');
+            if (self.value === 'night') {
+                target.style.backgroundColor = 'black';
+                target.style.color = 'white';
+                self.value = 'day'
+
+                var alist = document.querySelectorAll('a');
+                var i = 0;
+                while (i < alist.length) {
+                    alist[i].style.color = 'pink';
+                    console.log(alist[i]);
+                    i = i + 1;
+                }
+            } else {
+                target.style.backgroundColor = 'white';
+                target.style.color = 'black';
+                self.value = "night"
+
+                var alist = document.querySelectorAll('a');
+                var i = 0;
+                while (i < alist.length) {
+                    alist[i].style.color = 'powderblue';
+                    console.log(alist[i]);
+                    i = i + 1;
+                }
+            }
+        }
+    </script>
+
 </body>
 
 </html>
