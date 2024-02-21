@@ -7,10 +7,212 @@
 </head>
 <body>
 
-    <h3>함수</h3>
-    <p>함수의 괄호() 1. 만들 때 / 2. 사용할 때
-        직접 만들 수도 있지만 내장된 함수도 있다.
-    </p>
+    <h1>1. compare operator</h1>
+    <h3>1&lt;2</h3>
+    <script>
+        // document.write 의 기능은 , JS 로 HTML 에 출력하기.
+        document.write("<h1>test</h1>")
+        document.write(1 < 2);
+    </script>
+    <h3>1&lt;1</h3>
+    <script>
+        document.write(1 < 2);
+    </script>
+
+    <br><br><br>
+
+    <h1>2. if</h1>
+    <h2>IF - true</h2>
+    <script>
+        document.write("1<br>");
+        if (true) {
+            document.write("2<br>");
+        } else {
+            document.write("3<br>");
+        }
+        document.write("4<br>");
+    </script>
+
+    <h2>IF - false</h2>
+    <script>
+        document.write("1<br>");
+        if (false) {
+            document.write("2<br>");
+        } else {
+            document.write("3<br>");
+        }
+        document.write("4<br>");
+    </script>
+
+    <br><br><br>
+
+    <h1>3. IF 활용</h1>
+    <input id="night_day" type="button" value="night" onclick="
     
+      if(document.querySelector('#night_day').value === 'night') {
+        document.querySelector('body').style.backgroundColor = 'black';
+        document.querySelector('body').style.color= 'white';
+        document.querySelector('#night_day').value = 'day';   
+      } else {
+        document.querySelector('body').style.backgroundColor = 'white';
+        document.querySelector('body').style.color= 'black';
+        document.querySelector('#night_day').value = 'night';   
+      }
+      ">
+
+    <br><br><br>
+
+    <h1>4. IF - this 사용</h1>
+    <p>- this 사용</p>
+    <input id="night_day" type="button" value="night" onclick="
+  if(this.value === 'night') {
+    document.querySelector('body').style.backgroundColor = 'black';
+    document.querySelector('body').style.color= 'white';
+    this.value = 'day';   
+  } else {
+    document.querySelector('body').style.backgroundColor = 'white';
+    document.querySelector('body').style.color= 'black';
+    this.value = 'night';   
+  }
+  ">
+    <br>
+    <p>- this 미사용</p>
+    <input id="night_day2" type="button" value="night" onclick="
+if(document.querySelector('#night_day2').value === 'night') {
+  document.querySelector('body').style.backgroundColor = 'black';
+  document.querySelector('body').style.color= 'white';
+  document.querySelector('#night_day2').value = 'day';   
+} else {
+  document.querySelector('body').style.backgroundColor = 'white';
+  document.querySelector('body').style.color= 'black';
+  document.querySelector('#night_day2').value = 'night';   
+}
+">
+
+    <br>
+
+    <h1>5. IF - target 변수 사용</h1>
+    <p>- body 태그를 target 변수에 할당. target 변수 사용.<br>
+        var target = document.querySelector('body'); </p>
+
+    <input type="button" value="night" onclick="
+            if(this.value === 'night') {
+                var target = document.querySelector('body');
+                target.style.backgroundColor = 'black';
+                target.style.color= 'white';
+                this.value = 'day';
+            } else {
+            var target = document.querySelector('body');
+                target.style.backgroundColor = 'white';
+                target.style.color= 'black';
+                this.value = 'night';
+            }
+            ">
+
+    <br><br><br>
+
+    <h1>6. 배열 - Array</h1>
+    <p>Syntax</p>
+    <p>
+    <h3>console result screen</h3>
+    coworkers <br>
+    -> (2) ['egoing', 'leezche']<br>
+    0: "egoing"<br>
+    1: "leezche"<br><br>
+    coworkers[0]<br>
+    'egoing'<br><br>
+    coworkers[1]<br>
+    'leezche'<br><br>
+    coworkers.length<br>
+    2</p>
+    <script>
+        var coworkers = ["egoing", "leezche"];
+    </script>
+
+    <p><b>- get : 배열의 요소를 가져오기</b></p>
+    <script>
+        document.write(coworkers[0]);
+        document.write(coworkers[1]);
+    </script>
+
+    <br>
+
+    <p><b>- count : 배열 요소의 갯수(size, length)</b></p>
+    <script>
+        document.write(coworkers.length);
+    </script>
+
+    <br>
+
+    <p><b>- add : 배열에 요소를 추가하는데, 배열의 뒤에 추가함</b></p>
+    <script>
+        coworkers.push('duru');
+        coworkers.push('taeho');
+    </script>
+
+    <br><br><br>
+
+    <h1>7. Loop - 반복문의 필요성, 문제 제시</h1>
+    <ul>
+        <script>
+            document.write('<li>1</li>');
+            document.write('<li>2</li>');
+            document.write('<li>3</li>');
+            document.write('<li>4</li>');
+        </script>
+    </ul>
+
+    <br>
+
+    <p><b>- 2, 3번째 코드 3번 반복</b></p>
+    <script>
+        document.write('<li>1</li>');
+        var i = 0;
+        while (i < 3) {
+            // i가 3이 될 때까지 3번(i=0,1,2일 때) 반복 실행
+            document.write('<li>2</li>');
+            document.write('<li>3</li>');
+            i = i + 1;
+        }
+        document.write('<li>4</li>');
+        // 순서도 i = 0 일 때, 실행되고
+        // i = 3 일 때, 빠져 나옴.
+    </script>
+
+    <br>
+
+    <p><b>- 배열과 반복문(반복 패턴)</b></p>
+
+    <ul>
+        <script>
+            var lunch = ["ramen", "gyudong", "udong", "soba", "sushi"]
+            var i = 0;
+            while (i < lunch.length) {
+                document.write('<li>' + lunch[i] + '</li>');
+                i = i + 1;
+            }
+        </script>
+    </ul>
+
+    <p><b>- 배열과 반복문(연습 : 짝수 출력)</b></p>
+    <p>1) while 문 사용</p>
+
+    <p>2) if 문 사용</p>
+    <script>
+        var sampleEven = []
+        var i = 1;
+        while (i < 10) {
+            if (i % 2 == 0) {
+                document.write('<li>' + i + '</li>');
+            }
+            i = i + 1;
+        }
+    </script>
+
+<h1>8. Input - button 속성</h1>
+<p><b>- 아래 링크 방법 1,2 참조</b></p>
+<a href="practice/240221/2 css test.html">CSS</a>
+
+
 </body>
 </html>
