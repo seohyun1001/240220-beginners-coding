@@ -13,9 +13,9 @@
     <h1><a href="index.html">WEB</a></h1>
     <div id="grid">
         <ol>
-            <li><a href="1.html">HTML</a></li>
-            <li><a href="2.html">CSS</a></li>
-            <li><a href="3.html">JavaScript</a></li>
+            <li><a href="1 html.html">HTML</a></li>
+            <li><a href="2 css.html">CSS</a></li>
+            <li><a href="3 javaScript.html">JavaScript</a></li>
         </ol>
 
         <div id="article">
@@ -51,30 +51,38 @@
             </p>
         </div>
     </div>
+
     <script>
         function nightDayHandler(self) {
-            // var target = document.querySelector('body');
+            var target = document.querySelector('body');
             if (self.value === 'night') {
                 // 이 부분을 함수로 변경, 재사용 해보기
                 // body 태그의 글자색, 배경색을 변경하는 코드
                 // 기존에는 부분 ㅈ우복되는 부분을 target으로 변수에 할당하여 리팩토링,
                 // 지금은 함수를 이용
-                // target.style.backgroundColor = 'black' ->;
-                BodySetBackgroudSetColor('black')
-                // target.style.color = 'white' ->;
-                BodySetColor('white')
+                // 1. target.style.backgroundColor = 'black' ->;
+                // 2. BodySetBackgroudSetColor('black')
+                body.setBackgroundColor('white')
+                // 1. target.style.color = 'white' ->;
+                // 2. BodySetColor('white')
+                body.setColor('black')
                 self.value = 'day'
-                setColor('red')
+                // setColor('red')
 
+                Links.setColor('coral')
             } else {
-                // target.style.backgroundColor = 'white';
-                BodySetBackgroudSetColor('white')
-                // target.style.color = 'black';
-                BodySetColor('black')
+                // 1. target.style.backgroundColor = 'white';
+                // 2. BodySetBackgroudSetColor('white')
+                Body.setBackgroundColor('black')
+                // 1. target.style.color = 'black';
+                // 2. BodySetColor('black')
+                Body.setColor('white')
                 self.value = 'night'
-                setColor('blue')
+                // setColor('blue')
+                Links.setColor('aquamarine')
             }
         }
+
 
         function setColor(color) {
             // 필기에는 함수명을 LinksSetColor로 함
@@ -97,6 +105,35 @@
         // body 태그 하위에 배경색을 변경하는 함수
         function BodySetBackgroudSetColor(color) {
             document.querySelector('body').style.backgroundColor = color;
+        }
+
+        // body라는 이름의 객체 형태
+        // 객체 안에 , 속성으로 익명 함수를 이용하고 있다.
+        // 키 : setColor
+        // 값 : function ~ 문장
+        var Body = {
+            setColor: function (color) {
+                document.querySelector('Body').style.color = color;
+            }
+            ,
+            setBackgroundColor: function (color) {
+                document.querySelector('Body').style.backgroundColor = color;
+            }
+        }
+
+
+        // 기본에 a 태그 4개 선택해서, 색 변경하는 기능을 객체 함수로 담기
+        // 키 : setColor
+        // 값 : function ~ 문장
+        var Links = {
+            setColor: function (color) {
+                var alist = document.querySelector('a');
+                var i = 0;
+                while (i < alist.length) {
+                    alist[i].style.color = color;
+                    i = i + 1;
+                }
+            }
         }
 
     </script>

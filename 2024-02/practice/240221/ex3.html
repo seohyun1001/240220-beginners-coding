@@ -18,9 +18,9 @@
         }
 
         // 주의사항 : 문자열 표기시 -> 작은 따옴표('') or 큰 따옴표("")
-                // 안에 작성하고, 문자열 내부에 또 문자열이 온다면
-                // 예) "  '안에는 작은 따옴표'  "
-                // 예2) '  "안에는 큰 따옴표"  '
+        // 안에 작성하고, 문자열 내부에 또 문자열이 온다면
+        // 예) "  '안에는 작은 따옴표'  "
+        // 예2) '  "안에는 큰 따옴표"  '
         function sumColorRed(left, right) {
             // 사칙 연산에서 +(더하기) 차례대로 진행이 되는데,
             // 문자열을 먼저 + 사용 시, 이때는 자동적으로 연결 연산자로 사용이 됨.
@@ -33,6 +33,94 @@
         sum(2, 3);
         sumColorRed(100, 200);
         sum(3, 4);
+
+
+        document.write('<b>' + "- 객체 형식으로 get, set 연습해보기" + '</b>')
+        br()
+        //객체 형식으로 get, set 연습해보기
+        var coworkers = {
+            "programmer": "egoing",
+            "designer": "leezche"
+        }
+        // 객체의 키로 해당 값 가져오기 연습
+        document.write("coworkers의 키 programmer로 해당 값 가져오기 : " + coworkers.programmer)
+        br()
+
+        // 추가로 값 넣기
+        coworkers.test = "lsy"
+        document.write("coworkers의 키 test로 해당 값 가져오기 : " + coworkers.key)
+        br()
+
+        // 추가로 값 넣기2 : 해당 변수에 띄워쓰기 포함 되어 있을 때
+        coworkers["test data"] = "lsy data";
+        document.write("coworkers의 키 test data로 해당 값 가져오기 : " + coworkers["test data"])
+
+        br()
+        br()
+        br()
+
+        // 객체와 반복문을 이용해보기 : 향상된 for문 -> in 키워드 이용
+        // 해당 복수개에서 하나씩 꺼내서 사용해보기
+        // 기본 문법 구조 : for (변수 in 복수개(객체, 배열 등))
+        // 동작 방식 : 복수개에서 하나씩 꺼내서 변수에 담기
+        document.write('<b>' + "- coworkers의 모든 속성 조회 후 for문으로 해당 key 값 가져오기" + '</b>')
+        br()
+        for (var key in coworkers) {
+            document.write(key + '<br>');
+        }
+
+        br()
+        br()
+
+        // key에 대응하는 value 값 조회
+        document.write('<b>' + "- 객체의 key로 해당 value 값 조회하기" + '</b>')
+        br()
+        for (var key in coworkers) {
+            document.write(coworkers[key] + '<br>');
+        }
+
+        br()
+        br()
+
+        // key, value 모두 조회
+        document.write('<b>' + "- key, value 모두 출력" + '</b>')
+        br()
+        for (var key in coworkers) {
+            document.write(key + ' : ' + coworkers[key] + '<br>');
+        }
+
+        br()
+        br()
+        br()
+
+        // 객체에 함수를 설정
+        document.write('<b>' + "- 객체에 함수로 set, get 예시(익명 함수)" + '</b>')
+        br()
+
+        // 익명 함수, 일회용으로 사용, 보통 변수에 담아서 정의 및 사용을 함
+        // 나중에 화살표 함수로 확장시에도 사용
+        // 화살표 함수 기본 문법 : (매개변수) =. {실행될 내용}
+        coworkers.showAll = function () {
+            for (var key in coworkers) {
+                document.write(key + ' : ' + coworkers[key] + '<br>');
+            }
+        }
+
+        // coworkers를 this로 대체 가능함
+        // 이유는 현재 함수의 부모의 요소가 coworkers이기 때문에
+
+        // 객체에 있는 함수 이용(많이 씀)
+        coworkers.showAll();
+
+
+
+
+
+
+        function br() {
+            document.write("<br>")
+        }
+
     </script>
 </body>
 
