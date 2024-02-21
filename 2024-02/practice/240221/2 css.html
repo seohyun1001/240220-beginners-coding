@@ -53,22 +53,29 @@
     </div>
     <script>
         function nightDayHandler(self) {
-            var target = document.querySelector('body');
+            // var target = document.querySelector('body');
             if (self.value === 'night') {
-                target.style.backgroundColor = 'black';
-                target.style.color = 'white';
+                // 이 부분을 함수로 변경, 재사용 해보기
+                // body 태그의 글자색, 배경색을 변경하는 코드
+                // 기존에는 부분 ㅈ우복되는 부분을 target으로 변수에 할당하여 리팩토링,
+                // 지금은 함수를 이용
+                // target.style.backgroundColor = 'black' ->;
+                BodySetBackgroudSetColor('black')
+                // target.style.color = 'white' ->;
+                BodySetColor('white')
                 self.value = 'day'
-
                 setColor('red')
+                
             } else {
-                target.style.backgroundColor = 'white';
-                target.style.color = 'black';
+                // target.style.backgroundColor = 'white';
+                BodySetBackgroudSetColor('white')
+                // target.style.color = 'black';
+                BodySetColor('black')
                 self.value = 'night'
-
                 setColor('blue')
             }
         }
-        
+
         function setColor(color) {
             var alist = document.querySelectorAll('a');
             var i = 0;
@@ -78,6 +85,18 @@
                 i = i + 1;
             }
         }
+
+        // body 태그 하위에 글자색을 변경하는 함수
+        // 주의사항 : 함수를 사용시 인자값으로 문자열 타입으로 사용하기
+        function BodySetColor(color) {
+            document.querySelector('body').style.color = color;
+        }
+
+        // body 태그 하위에 배경색을 변경하는 함수
+        function BodySetBackgroudSetColor(color) {
+            document.querySelector('body').style.backgroundColor = color;
+        }
+
     </script>
 </body>
 
