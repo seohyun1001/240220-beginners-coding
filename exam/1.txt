@@ -3,4 +3,7 @@
 -> 로그인, 회원가입, 메인 페이지(헤더, 콘텐츠, 푸터 3개 + 추가 사이드 메뉴 4개로 구성)
 
 1. 기획서(화면설계-카카오 오븐)
+
+https://ovenapp.io/view/Ehf4K4w4bGyD8yJbIMZkiNK0T6JXKkdP/w61KW
+
 2. 코드 : HTML, CSS를 위주로 작업 + JS는 옵션으로
