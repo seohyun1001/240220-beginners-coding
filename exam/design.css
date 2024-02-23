@@ -9,22 +9,6 @@
     margin-right: 10px;
 }
 
-#grid {
-    padding-left: 30px;
-    padding-right: 30px;
-}
-
-#grid li {
-    display: inline;
-    padding-right: 30px;
-}
-
-#grid li a {
-    font-size: 20px;
-    color: darkred;
-    text-decoration-line: none;
-    font-weight: bold;
-}
 
 #mainPhoto {
     height: 600px;
@@ -46,9 +30,10 @@
 }
 
 .d-flex {
+    display: flex;
     flex-wrap: nowrap;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     justify-content: start;
 }
 
