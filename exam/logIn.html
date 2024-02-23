@@ -8,52 +8,7 @@
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"> -->
     <style>
-        .login-container {
-            width: 300px;
-            margin: 100px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .login-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        .input-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 3px;
-        }
-
-        .input-group input[type="text"],
-        .input-group input[type="password"] {
-            width: 277px;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            background-color: #9e473c;
-            color: white;
-            border: none;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        .login-btn:hover {
-            background-color: #9e473c;
-        }
+        
         
     </style>
     <link rel="stylesheet" href="./logIn.css">
@@ -83,8 +38,7 @@
                     <label for="password">비밀번호:</label>
                     <input type="password" id="password" name="password" required placeholder="password">
                 </div>
-                <button type="submit" class="login-btn">로그인</button>
-                <a href="./main.html" class="mainLink"></a>
+                <input type="button" class="login-btn" value="로그인" onclick="successLogIn()">
             </form>
         </div>
 
@@ -109,6 +63,13 @@
             </footer>
         </div>
     </div>
+
+    <script>
+        function successLogIn() {
+            alert('로그인에 성공하였습니다!')
+            window.location.href = './main.html';
+        }
+    </script>
 <!-- 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
