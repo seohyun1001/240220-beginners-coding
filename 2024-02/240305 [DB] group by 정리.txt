@@ -1,54 +1,54 @@
--- ´ÙÁßÇà ÇÔ¼ö
--- sumÀ¸·Î ÇÕ°è ±¸ÇÏ±â
+-- ë‹¤ì¤‘í–‰ í•¨ìˆ˜
+-- sumìœ¼ë¡œ í•©ê³„ êµ¬í•˜ê¸°
 SELECT SUM(sal) FROM emp;
 
--- *ÁÖÀÇ»çÇ×
--- ´ÙÁßÇà ÇÔ¼ö¿Í ´ÙÁßÇà ÇÔ¼ö¸¦ »ç¿ëÇÏÁö ¾ÊÀº ÀÏ¹Ý ¿­Àº °°ÀÌ Ãâ·ÂÇÒ ¼ö ¾øÀ½
+-- *ì£¼ì˜ì‚¬í•­
+-- ë‹¤ì¤‘í–‰ í•¨ìˆ˜ì™€ ë‹¤ì¤‘í–‰ í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ì§€ ì•Šì€ ì¼ë°˜ ì—´ì€ ê°™ì´ ì¶œë ¥í•  ìˆ˜ ì—†ìŒ
 
--- ½Ç½À 7-4(p.179)
+-- ì‹¤ìŠµ 7-4(p.179)
 SELECT SUM(DISTINCT sal),
     SUM(ALL sal),
     SUM(sal) FROM EMP;
 
 -- COUNT
--- ½Ç½À 7-5(p.181)
+-- ì‹¤ìŠµ 7-5(p.181)
 SELECT COUNT(*) FROM emp;
 
--- ½Ç½À 7-6(p.181)
+-- ì‹¤ìŠµ 7-6(p.181)
 SELECT COUNT(*) FROM emp
     WHERE deptno = 30;
     
--- ½Ç½À 7-7(p.181)
+-- ì‹¤ìŠµ 7-7(p.181)
 SELECT COUNT(DISTINCT sal),
     COUNT(ALL sal),
     COUNT(sal) FROM emp;
 
--- null°ªÀº ¼¼¾î ÁÖÁö ¾ÊÀ½
--- ½Ç½À 7-8(p.182)
+-- nullê°’ì€ ì„¸ì–´ ì£¼ì§€ ì•ŠìŒ
+-- ì‹¤ìŠµ 7-8(p.182)
 SELECT COUNT(comm) FROM emp;
 
--- ½Ç½À 7-9(p.182)
+-- ì‹¤ìŠµ 7-9(p.182)
 SELECT COUNT(comm) FROM emp
     WHERE comm IS NOT NULL;
 
--- MAX, MIN : ³¯Â¥µµ °¡´É!
+-- MAX, MIN : ë‚ ì§œë„ ê°€ëŠ¥!
 SELECT MAX(sal), MIN(sal),
     MAX(hiredate), MIN(hiredate) FROM emp;
 
--- ½Ç½À 7-10(p.183)
+-- ì‹¤ìŠµ 7-10(p.183)
 SELECT MAX(sal) FROM emp
     WHERE deptno = 10;
 
--- ½Ç½À 7-11(p.183)
+-- ì‹¤ìŠµ 7-11(p.183)
 SELECT MIN(sal) FROM emp
     WHERE deptno = 10;
 
 -- AVG
--- ½Ç½À 7-14(p.184)
+-- ì‹¤ìŠµ 7-14(p.184)
 SELECT ROUND(AVG(sal),0) AS "30" FROM emp
     WHERE deptno = 30;
 
--- »ç¿øµéÀÇ ±Þ¿©ÀÇ ÃÑÇÕ, Æò±Õ, ÃÖ´ë, ÃÖ¼Ò, ÃÑ¿øÀ» ±¸ÇÏ´Â SQL¹®
+-- ì‚¬ì›ë“¤ì˜ ê¸‰ì—¬ì˜ ì´í•©, í‰ê· , ìµœëŒ€, ìµœì†Œ, ì´ì›ì„ êµ¬í•˜ëŠ” SQLë¬¸
 SELECT SUM(sal) AS SUM,
     ROUND(AVG(sal), 0) AS AVG,
     MAX(sal) AS MAX,
@@ -57,8 +57,8 @@ SELECT SUM(sal) AS SUM,
 
 
 
--- GROUP BY Àý
--- ½Ç½À 7-16(p.186)
+-- GROUP BY ì ˆ
+-- ì‹¤ìŠµ 7-16(p.186)
 SELECT '10' AS deptno,
     SUM(sal) AS SUM,
     ROUND(AVG(sal), 0) AS AVG,
@@ -83,7 +83,7 @@ SELECT '30' AS deptno,
     COUNT(empno) AS TOTAL FROM emp
     WHERE deptno = 30;
     
--- ½Ç½À 7-17(p.187)
+-- ì‹¤ìŠµ 7-17(p.187)
 SELECT TRUNC(AVG(sal)), deptno FROM emp
     GROUP BY deptno;
 SELECT TRUNC(AVG(sal)), mgr FROM emp
@@ -93,65 +93,65 @@ SELECT TRUNC(AVG(sal)), mgr, count(*) FROM emp
 SELECT empno, AVG(sal) FROM emp
     GROUP BY empno;
 
--- ½Ç½À 7-18(p.188)
+-- ì‹¤ìŠµ 7-18(p.188)
 SELECT deptno, job, AVG(sal) FROM emp
     GROUP BY deptno, job
     ORDER BY deptno, job;
     
     
 
--- HAVING Àý(GROUP BYÀÇ Á¶°Ç½Ä)
--- ½Ç½À 7-20(p.190)
--- ½Ç½À 7-22(p.192)
+-- HAVING ì ˆ(GROUP BYì˜ ì¡°ê±´ì‹)
+-- ì‹¤ìŠµ 7-20(p.190)
+-- ì‹¤ìŠµ 7-22(p.192)
 SELECT deptno, job, AVG(sal) FROM emp
     GROUP BY deptno, job
         HAVING AVG(sal) >= 2000
     ORDER BY deptno, job;
 
--- ½Ç½À 7-23(p.192)
+-- ì‹¤ìŠµ 7-23(p.192)
 SELECT deptno, job, AVG(sal) FROM emp
     WHERE sal <= 3000
     GROUP BY deptno, job
         HAVING AVG(sal) >= 2000
     ORDER BY deptno, job;
     
--- ±Þ¿©°¡ 2000ÀÌ ³Ñ´Â »ç¿ø Áß, ºÎ¼­º° Æò±Õ ±Þ¿©¸¦ Ãâ·ÂÇÏ´Â SQL¹®
+-- ê¸‰ì—¬ê°€ 2000ì´ ë„˜ëŠ” ì‚¬ì› ì¤‘, ë¶€ì„œë³„ í‰ê·  ê¸‰ì—¬ë¥¼ ì¶œë ¥í•˜ëŠ” SQLë¬¸
 SELECT deptno, TRUNC(AVG(sal)) AS AVERAGE FROM emp
     WHERE sal >= 2000
         GROUP BY deptno
             ORDER BY deptno;
 
--- Á÷Ã¥º° »ç¿ø¼ö°¡ 2¸íÀÌ ³Ñ´Â Á÷Ã¥À» Ãâ·ÂÇÏ´Â SQL¹®
+-- ì§ì±…ë³„ ì‚¬ì›ìˆ˜ê°€ 2ëª…ì´ ë„˜ëŠ” ì§ì±…ì„ ì¶œë ¥í•˜ëŠ” SQLë¬¸
 SELECT job, COUNT(*) FROM emp
     GROUP BY job
         HAVING COUNT(*) > 2;
 
 
 
--- ROLLUP : ¼Ò±×·ì, ´ë±×·ì, ÃÑ°è, N+1°³ÀÇ ±×·ìº° °á°ú¸¦ Ãâ·ÂÇÏ´Â ÇÔ¼ö
--- ½Ç½À 7-25(p.196)
+-- ROLLUP : ì†Œê·¸ë£¹, ëŒ€ê·¸ë£¹, ì´ê³„, N+1ê°œì˜ ê·¸ë£¹ë³„ ê²°ê³¼ë¥¼ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
+-- ì‹¤ìŠµ 7-25(p.196)
 SELECT deptno, job, COUNT(*), MAX(sal), SUM(sal), TRUNC(AVG(sal)) FROM emp
     GROUP BY ROLLUP(deptno, job)
         ORDER BY deptno, job;
 
 -- CUBE
--- ½Ç½À 7-26(p.197)   
+-- ì‹¤ìŠµ 7-26(p.197)   
 SELECT deptno, job, COUNT(*), MAX(sal), SUM(sal), TRUNC(AVG(sal)) FROM emp
     GROUP BY CUBE(deptno, job)
         ORDER BY deptno, job;
 
 -- GROUPING SETS
--- ½Ç½À 7-29(p.201)
+-- ì‹¤ìŠµ 7-29(p.201)
 SELECT deptno, job, COUNT(*) FROM emp
     GROUP BY GROUPING SETS(deptno, job)
         ORDER BY deptno, job;
         
         
 
--- ±×·ìÈ­ ÇÔ¼ö
+-- ê·¸ë£¹í™” í•¨ìˆ˜
 -- GROUPING
--- GROUPING_ID : 2Áø¼ö ÀÌ¿ë
--- ½Ç½À 7-32(p.205)
+-- GROUPING_ID : 2ì§„ìˆ˜ ì´ìš©
+-- ì‹¤ìŠµ 7-32(p.205)
 SELECT deptno, job, COUNT(*), SUM(sal),
     GROUPING(deptno),
     GROUPING(job),
@@ -160,11 +160,11 @@ SELECT deptno, job, COUNT(*), SUM(sal),
             ORDER BY deptno, job;
 
 -- LISTAGG
--- ½Ç½À 7-33(p.206)
+-- ì‹¤ìŠµ 7-33(p.206)
 SELECT deptno, ename FROM emp
     GROUP BY deptno, ename;
 
--- ½Ç½À 7-34(p.207)
+-- ì‹¤ìŠµ 7-34(p.207)
 SELECT deptno,
     LISTAGG(ename, ', ')
     WITHIN GROUP(ORDER BY sal DESC) AS ENAMES FROM emp
