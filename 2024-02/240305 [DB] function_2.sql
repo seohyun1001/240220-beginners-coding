@@ -70,7 +70,7 @@ SELECT empno,
     RPAD(SUBSTR(empno,1,2), LENGTH(empno), '*') AS MASKING_EMPNO,
     ename,
     RPAD(SUBSTR(ename,1,1), LENGTH(ename), '*') AS MASKING_ENAME FROM emp
-    WHERE LENGTH(ename) = 5;
+    WHERE LENGTH(ename) >= 5 AND LENGTH(ename) < 6;
 
 -- 2.
 SELECT empno, ename, sal,
@@ -79,14 +79,19 @@ SELECT empno, ename, sal,
     
 -- 3.
 SELECT empno, ename, hiredate,
-    TO_DATE(ADD_MONTHS(hiredate, 3),'YYYY-MM-DD') AS "R_JOB",
+    TO_CHAR(NEXT_DAY(ADD_MONTHS(hiredate, 3),'¿ù¿äÀÏ'),'YYYY-MM-DD') AS "R_JOB",
     CASE
         WHEN comm IS NULL THEN 'N/A'
         ELSE TO_CHAR(comm) END AS COMM
     FROM emp;
     
 -- 4.
-SELECT empno, ename, mgr,
+SELECT empno, ename, NVL(TO_CHAR(mgr),' ') AS MGR,
+    CASE
+        WHEN TO_CHAR(mgr) IS NULL THEN ' '
+        ELSE TO_CHAR(mgr)
+    END AS CASE_MGR,
+    
     CASE
         WHEN mgr IS NULL THEN '0000'
         WHEN SUBSTR(mgr,1,2) = 75 THEN '5555'
