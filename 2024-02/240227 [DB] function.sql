@@ -1,0 +1,282 @@
+-- 1. 문자 함수
+-- UPPER LOWER INITCAP : 대소문자 변환 함수
+-- 실습 6-1 (p.130)
+SELECT ename, UPPER(ename), LOWER(ename), INITCAP(ename) FROM emp;
+
+-- 실습 6-2 (p.131)
+SELECT * FROM emp
+    WHERE UPPER(ename) = UPPER('Scott');
+    
+-- 실습 6-3 (p.131)    
+SELECT * FROM emp
+    WHERE UPPER(ename) LIKE UPPER('%scott%');
+    
+
+
+-- LENGTH(열 이름) : 문자열의 길이를 구하는 함수
+-- 실습 6-4 (p.132)
+SELECT ename, LENGTH(ename) FROM emp;
+-- 실습 6-5 (p.133)
+SELECT ename, LENGTH(ename) FROM emp
+    WHERE LENGTH(ename) >= 5;
+
+-- LENGTHB : byte수를 변환시켜 줌
+-- 실습 6-6 (p.133)
+SELECT LENGTH('한글'), LENGTHB('한글') FROM dual;
+-- dual : 더미 데이터, 함수 확인용
+
+
+
+-- SUBSTR : 문자열 일부를 추출하는 함수
+-- SUBSTR(문자열 데이터, 시작 위치, 추출할 길이)
+-- SUBSTR(문자열 데이터, 시작 위치) : 시작 위치부터 문자열 끝까지 추출
+-- 실습 6-7 (p.134)
+SELECT job, SUBSTR(job,1,2), SUBSTR(job,3,2), SUBSTR(job,5) FROM emp;
+
+-- 실습 6-8 (p.136)
+SELECT job, SUBSTR(job, -LENGTH(job)),
+SUBSTR(job, -LENGTH(job),2),
+SUBSTR(job, -3) FROM emp;
+
+-- 사원 이름의 첫 두 글자와 마지막 두 글자를 출력하는 sql문을 작성하세요.
+SELECT ename, SUBSTR(ename,1,2), SUBSTR(ename, -2) FROM emp;
+
+-- 주민등록번호의 앞 6글자와 전화호의 앞 8글자만 출력하는 SQL문 작성
+SELECT '971210-2000000', SUBSTR('971210-2000000',1,6),
+    '010-1234-5678', SUBSTR('010-1234-5678',1,8) FROM dual;
+    
+
+
+-- INSTR : 문자열 데이터 안에서 특정 문자의 위치를 찾는 함수
+-- INSTR(대상 문자열 데이터, 찾으려는 문자, 시작 위치, 시작 위치로부터 몇번째)
+-- 실습 6-9 (p.137)
+SELECT INSTR('HELLO, ORACLE!','L') AS INSTR_1,
+INSTR('HELLO, ORACLE!','L',5) AS INSTR_2,
+INSTR('HELLO, ORACLE!','L',2,2) AS INSTR_3 FROM dual;
+
+SELECT INSTR('HELLO, ORACLE!','ORACLE') AS INSTR FROM dual;
+
+-- 실습 6-10 (p.138)
+-- : INSTR을 이용하여 사원 이름에 문자 S가 있는 행 구하기
+SELECT * FROM emp
+    WHERE INSTR(ename, 'S') > 0;
+    
+-- 실습 6-11 (p.138)
+-- : LIKE를 이용하여 사원 이름에 문자 S가 있는 행 구하기
+SELECT * FROM emp
+    WHERE ename LIKE '%S%';
+
+-- INSTR과 LIKE를 사용하여 두번째와 세번째 글자가 LA인 사원 이름을 찾는 SQL문 작성
+-- - INSTR
+SELECT * FROM emp
+    WHERE INSTR(ename,'LA') = 2;
+-- - LIKE
+SELECT * FROM emp
+    WHERE ename LIKE '_LA%';
+    
+    
+    
+-- REPLACE : 특정 문자를 다른 문자로 바꿈
+-- 실습 6-12 (P.139)
+SELECT '010-1234-5678' AS REPLACE_BEFORE,
+    REPLACE('010-1234-5678','-',' ') AS REPLACE_1,
+    REPLACE('010-1234-5678','-') AS REPLACE_2 FROM dual;
+
+-- 대소문자 구분해줘야 함
+SELECT REPLACE('Hello','hello') AS 주의 FROM dual;
+
+
+
+-- LPAD, RPAD : 데이터의 빈 공간을 특정 문자로 채우는 함수
+-- 실습 6-13 (P.140)
+SELECT 'Oracle',
+    LPAD('Oracle',10,'#') AS LPAD_1,
+    RPAD('Oracle',10,'*') AS RPAD_1,
+    LPAD('Oracle',10) AS LPAD_2,
+    RPAD('Oracle',10) AS RPAD_2 FROM dual;
+
+-- 실습 6-14 (p.141)
+SELECT RPAD('971210-',14,'*') AS RPAD_1,
+RPAD('010-1234-',13,'*') AS RPAD_2 FROM dual;
+
+-- 주민등록번호의 8자를 출력하고 나머지는 *로 출력
+-- 전화번호의 9자를 출력하고 나머지는 *로 출력
+SELECT RPAD(SUBSTR('900101-1234567',1,7),LENGTH('900101-1234567'),'*') AS 주민등록번호,
+    RPAD(SUBSTR('010-1234-5678',1,9),LENGTH('010-1234-5678'),'*') AS 전화번호 FROM dual;
+
+
+
+-- CONCAT : 문자열 + 문자열
+-- 실습 6-15 (P.142)
+SELECT CONCAT(empno, ename),
+    CONCAT(empno, CONCAT(' : ', ename)) FROM EMP;
+    
+-- | 사용 가능
+SELECT empno || ename, empno || ' : ' || ename FROM emp;
+
+-- TRIM : 양쪽 공백이나 특정 문자를 지움
+-- LTRIM, RTRIM : 왼쪽 / 오른쪽 공백이나 특정 문자를 지움
+SELECT '[' || TRIM(' - -ORACLE- - ') || ']' AS TRIM,
+-- ' - -ORACLE- - '의 양쪽 공백 삭제
+    '[' || TRIM('-' FROM '- -ORACLE- -') || ']' AS TRIM,
+    -- '- -ORACLE- -'에서 양쪽 - 삭제
+    '[' || TRIM('-' FROM '---ORACLE---') || ']' AS TRIM FROM dual;
+
+
+-- 실습 6-18 (p.144)
+SELECT '[' || TRIM (' -ORACLE- ') || ']' AS "양쪽 공백 제거",
+    '[' || LTRIM (' -ORACLE- ') || ']' AS "왼쪽 공백 제거",
+    '[' || LTRIM ('<-ORACLE->', '-<') || ']' AS "왼쪽 -< 제거",
+    '[' || RTRIM (' -ORACLE- ') || ']' AS "오른쪽 공백 제거",
+    '[' || RTRIM ('<-ORACLE->', '>-') || ']' AS "오른쪽 >- 제거" FROM dual;
+
+
+-- 2. 숫자 함수
+-- ROUND : 특정 위치에서 반올림
+-- 실습 6-19 (p.147)
+SELECT ROUND(1234.5678) AS ROUND,
+    ROUND(1234.5678, 0) AS ROUND_0,
+    ROUND(1234.5678, 1) AS ROUND_1,
+    ROUND(1234.5678, 2) AS ROUND_2,
+    ROUND(1234.5678, -1) AS ROUND_MINUS1,
+    ROUND(1234.5678, -2) AS ROUND_MINUS2 FROM dual;
+
+-- TRUNC : 특정 위치에서 버림
+-- 실습 6-20 (p.148)
+SELECT TRUNC(1234.5678) AS TRUNC,
+    TRUNC(1234.5678, 0) AS TRUNC_0,
+    TRUNC(1234.5678, 1) AS TRUNC_1,
+    TRUNC(1234.5678, 2) AS TRUNC_2,
+    TRUNC(1234.5678, -1) AS TRUNC_MINUS1,
+    TRUNC(1234.5678, -2) AS TRUNC_MINUS2 FROM dual;
+
+-- CEIL, FLOOR : 가장 가까운 큰/작은 정수를 찾는 함수
+-- 실습 6-21 (p.148)
+SELECT CEIL(3.14),
+    FLOOR(3.14),
+    CEIL(-3.14),
+    FLOOR(-3.14) FROM dual;
+    
+-- MOD : 숫자를 나눈 후 나머지 값을 구함
+-- 실습 6-22 (p.149)
+SELECT MOD(15,6),
+    MOD(10,2),
+    MOD(11,2) FROM dual;
+
+
+
+-- 3. 날짜 함수
+-- SYSDATE : 현재 날짜를 출력하는 함수
+-- 실습 6-23 (p.150)
+SELECT SYSDATE AS NOW,
+    SYSDATE-1 AS YESTERDAY,
+    SYSDATE+1 AS TOMORROW FROM dual;
+    
+-- ADD_MONTHS : 월 수를 더하는 함수
+-- 실습 6-24 (p.151)
+SELECT SYSDATE, ADD_MONTHS(SYSDATE,3) FROM dual;
+
+-- 실습 6-25 (p.151)
+-- 입사 10주년이 되는 사원들 데이터 출력하기
+SELECT empno, ename, hiredate,
+    ADD_MONTHS(hiredate,12*10) AS WORK10YEAR FROM emp;
+
+-- 실습 6-26 (p.152)
+-- 입사 32년 미만인 사원 데이터 출력하기
+SELECT empno, ename, hiredate, sysdate FROM emp
+    WHERE ADD_MONTHS(hiredate, 12*37) > SYSDATE;
+
+-- MONTHS_BETWEEN : 두 날짜 간의 개월 수 차이를 구함
+-- 실습 6-27 (p.153)
+SELECT empno, ename, hiredate, sysdate,
+    SYSDATE - hiredate AS DAY,
+    -- 날짜와 날짜는 가산할 수 없음
+    MONTHS_BETWEEN(hiredate, SYSDATE) AS MONTH1,
+    MONTHS_BETWEEN(SYSDATE, hiredate) AS MONTH2,
+    TRUNC(MONTHS_BETWEEN(SYSDATE, hiredate)) AS MONTH3 FROM emp;
+    
+-- NEXT_DAY : 지정한 날짜에서 지정한 요일이 돌아오는 가장 가까운 날짜를 출력하는 함수
+-- LAST_DAY : 월의 마지막 날을 출력하는 함수
+-- 실습 6-28 (p.154)
+SELECT SYSDATE,
+    NEXT_DAY(SYSDATE, '월요일'),
+    LAST_DAY(SYSDATE) FROM dual;
+
+-- 현재 날짜를 기준으로 3달 후의 수요일의 날짜와 마지막 날을 출력하는 sql문
+SELECT ADD_MONTHS(SYSDATE, 3) AS "오늘 + 3개월",
+    NEXT_DAY(ADD_MONTHS(SYSDATE, 3), '수요일') AS "3달 후 수요일",
+    LAST_DAY(ADD_MONTHS(SYSDATE, 3)) AS "3달 후 마지막 날" FROM dual;
+    
+
+
+-- 4. 형 변환 함수
+-- 자동 형 변환
+SELECT 100 + '200' FROM dual;
+-- -> 문자 '200'을 자동으로 숫자형태로 변환
+SELECT 100 + '200A' FROM dual;
+-- -> 수치가 부적합하다고 오류가 뜸
+SELECT '100' + '200' FROM dual;
+-- -> 숫자로 자동 형 변환, 값이 300이 나옴
+SELECT '2024/02/27' FROM dual;
+-- -> 단순 문자열로 출력
+SELECT '2024/02/27' - hiredate FROM emp;
+
+-- TO_CHAR : 숫자/날짜 데이터를 문자 데이터로 변환
+-- 실습 6-33 (p.159)
+SELECT TO_CHAR(SYSDATE, 'YYYY/MM/DD HH24:MI:SS') AS 현재날짜시간,
+    TO_CHAR(SYSDATE, 'YYYY/MM/DD AM HH12:MI:SS') AS 현재날짜시간,
+    TO_CHAR(SYSDATE, 'YYYY-MM-DD DY HH24:MI:SS') AS 현재날짜시간 FROM dual;
+
+-- 실습 6-35 (p.160)
+SELECT SYSDATE,
+    TO_CHAR(SYSDATE, 'MM') AS MM,
+    TO_CHAR(SYSDATE, 'MON', 'NLS_DATE_LANGUAGE = KOREAN') AS MON_KOR,
+    TO_CHAR(SYSDATE, 'MON', 'NLS_DATE_LANGUAGE = JAPANESE') AS MON_JPN,
+    TO_CHAR(SYSDATE, 'MON', 'NLS_DATE_LANGUAGE = ENGLISH') AS MON_ENG,
+    TO_CHAR(SYSDATE, 'MONTH', 'NLS_DATE_LANGUAGE = KOREAN') AS MONTH_KOR,
+    TO_CHAR(SYSDATE, 'MONTH', 'NLS_DATE_LANGUAGE = JAPANESE') AS MONTH_JPN,
+    TO_CHAR(SYSDATE, 'MONTH', 'NLS_DATE_LANGUAGE = ENGLISH') AS MONTH_ENG FROM dual;
+
+-- 실습 6-36 (p.160)
+SELECT SYSDATE,
+    TO_CHAR(SYSDATE, 'MM') AS MM,
+    TO_CHAR(SYSDATE, 'DD') AS DD,
+    TO_CHAR(SYSDATE, 'DY', 'NLS_DATE_LANGUAGE = KOREAN') AS DY_KOR,
+    TO_CHAR(SYSDATE, 'DY', 'NLS_DATE_LANGUAGE = JAPANESE') AS DY_JPN,
+    TO_CHAR(SYSDATE, 'DY', 'NLS_DATE_LANGUAGE = ENGLISH') AS DY_ENG,
+    TO_CHAR(SYSDATE, 'DAY', 'NLS_DATE_LANGUAGE = KOREAN') AS DAY_KOR,
+    TO_CHAR(SYSDATE, 'DAY', 'NLS_DATE_LANGUAGE = JAPANESE') AS DAY_JPN,
+    TO_CHAR(SYSDATE, 'DAY', 'NLS_DATE_LANGUAGE = ENGLISH') AS DAY_ENG FROM dual;
+    
+
+
+-- 숫자 형식을 문자로 변환
+-- 실습 6-38 (p.162)
+SELECT sal,
+    TO_CHAR(sal, '$999,999') AS SAL_$,
+    -- 9는 출력x
+    TO_CHAR(sal, 'L999,999') AS SAL_L,
+    -- L은 설정된 나라의 통화를 표시
+    TO_CHAR(sal, '999,999.00') AS SAL_1,
+    -- 0은 생략 불가능
+    -- 데이터가 있으면 해당 데이터 표시
+    -- 데이터가 없으면 0으로 표시
+    TO_CHAR(sal, '000,999,999.00') AS SAL_2,
+    TO_CHAR(sal, '000999999.00') AS SAL_3,
+    TO_CHAR(sal, '999,999,00') AS SAL_4 FROM emp;
+
+
+    
+-- TO_NUMBER : 문자 데이터(숫자로 된 문자)를 숫자 데이터로 변환
+-- 실습 6-40 (p.163)
+SELECT '1,300' - '1,500' FROM dual;
+-- 데이터 안에 ','가 들어가 있어 ','를 문자로 인식했기 때문에 변환 불가
+
+-- 실습 6-41 (P.164)
+SELECT TO_NUMBER('1,500','999,999') - TO_NUMBER('1,300','999,999') FROM dual;
+
+
+
+-- TO_DATE : 문자 데이터를 날짜 데이터로 변환
+SELECT TO_DATE('2018-07-14','YYYY-MM-DD') AS TODATE,
+TO_DATE('20180714','YYYYMMDD') AS TODATE FROM dual;
