@@ -1,0 +1,14 @@
+CREATE TABLE COURSE_LIST (
+    division VARCHAR2(20) NOT NULL,
+    courseNum VARCHAR2(20) NOT NULL PRIMARY KEY,
+    courseName VARCHAR2(50) NOT NULL,
+    professor VARCHAR2(20) NOT NULL,
+    credit NUMBER(20) NOT NULL,
+    timeTable VARCHAR2(30) NOT NULL,
+    classroom VARCHAR2(30) NOT NULL,
+    limitCount NUMBER(10) NOT NULL,
+    grade NUMBER(10) NOT NULL);
+
+COMMIT;
+
+SELECT * FROM COURSE_LIST;
