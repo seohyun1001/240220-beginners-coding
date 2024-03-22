@@ -39,3 +39,16 @@ UPDATE dept_tcl
         WHERE deptno = 30;
 SELECT * FROM dept_tcl;
 COMMIT;
+
+
+
+CREATE TABLE DEPT_HW AS SELECT * FROM DEPT;
+-- 연습문제 (p.309)
+UPDATE dept_hw
+    SET dname = 'DATABASE', loc = 'SEOUL'
+        WHERE deptno = 30;
+SELECT * FROM dept_hw;
+
+ROLLBACK;
+
+COMMIT;
