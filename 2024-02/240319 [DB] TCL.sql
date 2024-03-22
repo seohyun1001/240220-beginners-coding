@@ -15,3 +15,27 @@ SELECT * FROM dept_tcl;
 -- 실습 11-5(p.296)
 COMMIT;
 SELECT * FROM dept_tcl;
+
+
+
+-- 실습 11-6(p.300)
+SELECT * FROM dept_tcl;
+
+-- 실습 11-7(p.300)
+DELETE FROM dept_tcl
+    WHERE deptno = 50;
+
+-- 실습 11-8(p.301)
+COMMIT;
+
+
+
+-- 실습 11-9(p.304)
+SELECT * FROM dept_tcl;
+
+-- 실습 11-10(p.304)
+UPDATE dept_tcl 
+    SET loc = 'SEOUL'
+        WHERE deptno = 30;
+SELECT * FROM dept_tcl;
+COMMIT;

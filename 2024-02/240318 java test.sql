@@ -13,3 +13,32 @@ COMMIT;
 
 SELECT * FROM COURSE_LIST;
 
+CREATE TABLE STUDENT_LIST(
+    studentNum NUMBER(10) NOT NULL PRIMARY KEY,
+    studentName VARCHAR2(20) NOT NULL,
+    studentMajor VARCHAR2(20) NOT NULL,
+    studentGrade NUMBER(10) NOT NULL,
+    studentPwd VARCHAR2(30) NOT NULL);
+
+COMMIT;
+
+INSERT INTO student_list
+    VALUES (2412345, '학생1', '경영학과', 3, '1234');
+
+SELECT * FROM student_list;
+
+CREATE TABLE EMPLOYEE_LIST(
+    employeeNum NUMBER(10) NOT NULL PRIMARY KEY,
+    employeeName VARCHAR2(20) NOT NULL,
+    employeeDEPT VARCHAR2(20) NOT NULL,
+    employeePwd VARCHAR2(30) NOT NULL);
+
+INSERT INTO employee_list
+    VALUES (24022222, '교수1', '경영학과', 'qwerty');
+
+INSERT INTO employee_list
+    VALUES (24933333, '직원1', '경영학과', 'aaa111');
+
+SELECT * FROM employee_list;
+
+COMMIT;
