@@ -202,10 +202,10 @@ SELECT * FROM deptseq;
 
     -- 3-2.
 CREATE SEQUENCE seq_deptseq_sequence
-    MAXVALUE 99 -- 최대값
-    MINVALUE 1 -- 최소값
-    NOCYCLE -- 반복여부(기본값 CYCLE)
-    NOCACHE; -- 메모리에 저장해 둘 다음 값들(기본값 20)
+    MAXVALUE
+    MINVALUE
+    NOCYCLE
+    NOCACHE;
 SELECT * FROM user_sequences;
 
     -- 3-3.
