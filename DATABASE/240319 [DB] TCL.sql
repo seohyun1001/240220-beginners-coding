@@ -48,5 +48,7 @@ UPDATE dept_hw
     SET dname = 'DATABASE', loc = 'SEOUL'
         WHERE deptno = 30;
 SELECT * FROM dept_hw;
+
 ROLLBACK;
+
 COMMIT;
