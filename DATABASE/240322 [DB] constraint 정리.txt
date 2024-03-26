@@ -363,3 +363,72 @@ CREATE TABLE emp_const (
 SELECT table_name, constraint_name, constraint_type FROM user_constraints
     WHERE table_name IN('DEPT_CONST', 'EMP_CONST')
     ORDER BY constraint_name;
+	
+	
+
+-- 연습문제(회원 등급 테이블)
+CREATE TABLE member_class (
+    class_code VARCHAR2(2) CONSTRAINT mbcls_clscode_chk
+        CHECK (class_code IN('01','02','03','04')),
+    class_name VARCHAR2(20) CONSTRAINT mbcls_clsname_chk_nn
+        CHECK (class_name IN('Family', 'Gold', 'Vip', 'VVip')) NOT NULL,
+    PRIMARY KEY(class_code)
+);
+
+-- 연습문제(약관 테이블)
+CREATE TABLE agreement (
+    agm_code VARCHAR2(2) CONSTRAINT agm_agmcode_chk_nn
+        CHECK (agm_code IN('01', '02')),
+    agm_title VARCHAR2(20) CONSTRAINT agm_agmtitle_chk_nn
+        CHECK (agm_title In('이용약관 동의', '개인정보 수집 및 이용 동의',
+                        'SMS 수신동의', '이메일 수신동의')) NOT NULL,
+    agm_cont VARCHAR2(100) CONSTRAINT agm_agmcont_nn NOT NULL,
+    agm_required VARCHAR2(1) CONSTRAINT agm_agmreq_chk_nn
+        CHECK (agm_required IN('Y', 'N')) NOT NULL,
+    PRIMARY KEY(agm_code)
+);
+
+-- 연습문제(회원 정보 테이블)
+CREATE TABLE member_info (
+    mem_id VARCHAR2(20) CONSTRAINT meminfo_memid_pk_chk_nn NOT NULL
+            CHECK((LENGTH(mem_id) BETWEEN 4 AND 16)),
+    mem_pwd VARCHAR2(20) CONSTRAINT meminfo_mempwd_chk_nn NOT NULL
+            CHECK((LENGTH(mem_pwd) BETWEEN 4 AND 16)),
+    mem_name VARCHAR2(20) CONSTRAINT meminfo_memname_nn NOT NULL,
+    mem_tel VARCHAR2(20) CONSTRAINT meminfo_memtel_chk_nn NOT NULL
+            CHECK (LENGTH(mem_tel) BETWEEN 9 AND 11),
+    mem_bthday DATE,
+    mem_sex VARCHAR2(2) CONSTRAINT meminfo_memsex_chk
+            CHECK(mem_sex IN('M', 'F')),
+    mem_email VARCHAR2(45),
+    mem_address VARCHAR2(45) CONSTRAINT meminfo_memaddr_nn NOT NULL,
+    mem_class_code VARCHAR2(2) CONSTRAINT meminfo_memcc_fk_nn NOT NULL
+            REFERENCES member_class (class_code),
+    PRIMARY KEY (mem_id)
+);
+
+-- 연습문제(약관 동의이력 테이블)
+CREATE TABLE agree_agm_his (
+    agm_code VARCHAR2(2) CONSTRAINT agh_agmcode_pk_fk_nn NOT NULL
+            REFERENCES agreement (agm_code),
+    his_id VARCHAR2(20) CONSTRAINT agh_hisid_pk_fk_nn NOT NULL
+            REFERENCES member_info (mem_id),
+    check_agree VARCHAR2(20) CONSTRAINT agh_chkagr_chk_nn NOT NULL
+            CHECK(check_agree IN('Y', 'N')),
+    agree_date DATE CONSTRAINT agh_agrdate_nn NOT NULL,
+    PRIMARY KEY(agm_code, his_id)
+);
+
+-- 연습문제(회원 서비스로그 테이블)
+CREATE TABLE member_service_log (
+    mem_id VARCHAR(20) CONSTRAINT serlog_memid_pk_fk_nn NOT NULL
+            REFERENCES member_info (mem_id),
+    join_date DATE CONSTRAINT serlog_jdate_nn NOT NULL,
+    pwd_alter_date DATE CONSTRAINT serlog_pdate_nn NOT NULL,
+    class_alter_date DATE CONSTRAINT serlog_cdate_nn NOT NULL,
+    login_date DATE CONSTRAINT serlog_ldate_nn NOT NULL,
+    login_count NUMBER CONSTRAINT serlog_lgnincount_nn NOT NULL,
+    order_count NUMBER,
+    pay_count NUMBER,
+    PRIMARY KEY(mem_id)
+);
