@@ -432,3 +432,7 @@ CREATE TABLE member_service_log (
     pay_count NUMBER,
     PRIMARY KEY(mem_id)
 );
+
+SELECT table_name, constraint_name, constraint_type FROM user_constraints
+    WHERE table_name IN('MEMBER_CLASS', 'AGREEMENT','MEMBER_INFO','AGREE_AGM_HIS','MEMBER_SERVICE_LOG')
+    ORDER BY constraint_name;
