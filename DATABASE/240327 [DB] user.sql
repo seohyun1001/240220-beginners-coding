@@ -68,6 +68,7 @@ FROM orclstudy;
 
 
 -- 객체 권한 부여하기 : SELECT, INSERT, UPDATE, DELETE 등
+-- scott 계정으로 실행하기
 CREATE TABLE temp (
     col1 VARCHAR2(20),
     col2 VARCHAR2(20)
@@ -77,3 +78,30 @@ GRANT
     SELECT, INSERT, UPDATE, DELETE
 ON temp
 TO orclstudy;
+
+-- 객체 권한 취소
+REVOKE
+    SELECT, INSERT, UPDATE, DELETE
+ON temp
+FROM orclstudy;
+-- -> 권한이 없다면 '테이블 또는 뷰가 존재하지 않는다'고 뜸
+
+-- 객체 권한은 실행 즉시 적용된다.
+
+
+
+-- 롤 : 여러 종류의 권한을 묶어 놓은 그룹
+-- 사전 정의된 롤
+-- connect 롤 : CREATE SESSION 권한만 가지고 있는 롤
+-- RESOURCE 롤 : CREATE VIEW, CREATE SYNONYM을 제외한 대부분의 권한을 가지고 있는 롤
+GRANT CONNECT, RESOURCE, CREATE VIEW, CREATE SYNONYM
+TO orclstudy;
+-- -> 관리자 권한을 제외한 대부분의 권한을 가지게 됨.
+
+-- 사용자 정의 롤
+-- 롤 생성 및 설정, 취소(관리자 계정으로 실행)
+-- 1). CREATE ROLE 구문으로 롤 생성
+CREATE ROLE rolestudy;
+-- 2). 생성한 롤에 권한 설정하기
+GRANT CONNECT, RESOURCE, CREATE VIEW, CREATE SYNONYM
+TO rolestudy;
