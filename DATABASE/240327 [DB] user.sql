@@ -105,3 +105,37 @@ CREATE ROLE rolestudy;
 -- 2). 생성한 롤에 권한 설정하기
 GRANT CONNECT, RESOURCE, CREATE VIEW, CREATE SYNONYM
 TO rolestudy;
+-- 3). 권한을 설정한 롤을 유저에게 설정하기
+GRANT rolestudy TO orclstudy;
+-- 4). 롤 취소하기
+REVOKE rolestudy FROM orclstudy;
+-- 5). 롤 삭제하기 : 롤을 삭제하면 롤을 부여 받았던 모든 계정의 롤이 취소되게 됨
+DROP ROLE rolestudy;
+
+
+
+-- 연습문제(p.416)
+-- 1.
+-- 1-1. system 계정으로 접속하여 prev_hw 계정 생성하기
+-- 1-2. 비밀번호는 ORCL로 지정, 접속 권한 부여 후 접속 가능 여부 확인하기
+CREATE USER prev_hw
+IDENTIFIED BY ORCL;
+GRANT CREATE SESSION TO prev_hw;
+
+-- 2. SCOTT 계정으로 접속, PREV_HW계정에 SCOTT 소유의 EMP, DEPT, SALGRADE 테이블에 SELECT 권한 부여,
+-- 권한 부여 후 PREV_HW 계정으로 SCOTT의 EMP, DEPT, SALGRADE 테이블 조회 확인
+ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
+GRANT RESOURCE, CREATE SESSION, CREATE TABLE TO scott;
+GRANT SELECT ON emp TO prev_hw;
+GRANT SELECT ON dept TO prev_hw;
+GRANT SELECT ON salgrade TO prev_hw;
+
+-- sqlplus : SELECT * FROM SCOTT.emp;
+-- -> 조회 됨
+
+-- 3. SCOTT 계정으로 접속 후 PREV_HW 계정에 SALGRADE 테이블의 SELECT 권한 취소,
+-- 권한 취소 후 PREV_HW계정으로 SCOTT의 SALGRADE 조회 확인
+REVOKE SELECT ON salgrade FROM prev_hw;
+
+-- sqlplus : SELECT * FROM scott.salgrade;
+-- -> 조회 안 됨
