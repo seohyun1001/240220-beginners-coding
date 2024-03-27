@@ -1,0 +1,244 @@
+-- 1. 패스워드가 1234인 guest01 사용자를 생성하시오
+CREATE USER guest01
+IDENTIFIED BY 1234;
+
+
+
+-- 2. 생성한 guest01 사용자에 데이터베이스에 접속, 리소스 사용, 뷰 생성,
+-- 동의어 생성이 가능한 권한을 부여하시오.
+GRANT
+    CONNECT, RESOURCE, CREATE VIEW, CREATE SYNONYM
+TO guest01;
+
+
+
+--  ★ guest01 사용자로 접속하여 다음의 그림과 같이 학과(dept), 학생(student), 교수(professor) 테이블과
+-- 데이터를 참고하여 제시된 문제에 답하시오.
+
+-- 3. dept(학과) 테이블을 다음과 같이 생성하기 위한 쿼리를 작성하라.
+-- deptno 고정길이 문자 3으로 지정하고, dname 가변길이 문자 20으로 설정한다.
+CREATE TABLE dept(
+    deptno CHAR(3),
+    dname VARCHAR2(20)
+);
+
+
+
+-- 4. dept(학과) 테이블에 deptno 컬럼에 기본키 제약조건을 설정하라.
+ALTER TABLE dept
+    ADD CONSTRAINT dept_deptno_pk
+    PRIMARY KEY (deptno);
+
+
+
+-- 5. 학생(student) 테이블을 생성하기 위해 다음과 같은 쿼리를 작성하시오
+-- studno 숫자로 설정하고, 기본키 제약조건 설정
+-- name은 데이터 타입 가변길이 문자열 10, not null과 unique 제약 조건을 설정
+-- deptno는 고정길이 문자열 3자, 학과(deptno)를 참조하도록 foregin key를 설정하라
+-- grade 필드는 숫자 1자로 설정하고 값이 1~4의 값만 들어가도록 check 제약조건을 설정하라.
+-- profno 필드는 숫자로 설정하라.
+CREATE TABLE student (
+    studno NUMBER CONSTRAINT stu_studno_pk PRIMARY KEY,
+    name VARCHAR2(10) CONSTRAINT stu_name_nn NOT NULL
+        CONSTRAINT stu_name_unq UNIQUE,
+    deptno CHAR(3) CONSTRAINT stu_deptno_fk REFERENCES dept (deptno),
+    grade NUMBER(1) CONSTRAINT stu_grade_chk
+        CHECK (grade BETWEEN 1 AND 4),
+    profno NUMBER
+);
+
+-- 교수 테이블
+-- profno 숫자로 설정하고, 기본키 제약조건 설정
+-- name은 데이터 타입 가변길이 문자열 10, not null 제약 조건을 설정
+-- deptno는 고정길이 문자열 3자, 학과(deptno)를 참조하도록 foregin key를 설정하라
+-- position 가변길이 문자열 10으로 설정하고 정교수, 부교수, 전임강사만 등록되도록 CHECK 제약조건을 설정하라
+-- pay 숫자로 설정하고, NOT NULL 제약조건을 설정하라
+CREATE TABLE professor (
+    profno NUMBER CONSTRAINT prof_profno_pk PRIMARY KEY,
+    name VARCHAR2(10) CONSTRAINT prof_name_nn NOT NULL,
+    deptno CHAR(3) CONSTRAINT prof_deptno_fk REFERENCES dept (deptno),
+    position VARCHAR2(20) CONSTRAINT prof_post_chk
+        CHECK (position IN('정교수','부교수','전임강사')),
+    pay NUMBER CONSTRAINT prof_pay_nn NOT NULL
+);
+
+
+
+-- 6. 학과(dept), 학생(student), 교수(professor) 테이블에 데이터를 입력하는 쿼리를 작성하시오
+-- 6-1. 학과 테이블
+CREATE SEQUENCE seq_dept_sequence
+    MAXVALUE 999
+    MINVALUE 101
+    NOCYCLE;
+
+INSERT INTO dept VALUES (seq_dept_sequence.NEXTVAL,'경영학과');
+INSERT INTO dept VALUES (seq_dept_sequence.NEXTVAL,'컴퓨터공학과');
+INSERT INTO dept VALUES (seq_dept_sequence.NEXTVAL,'영문학과');
+
+SELECT * FROM dept;
+
+-- 6-2. 학생 테이블
+CREATE SEQUENCE seq_student_sequence
+    MAXVALUE 999
+    MINVALUE 101
+    NOCYCLE;
+
+INSERT INTO student (studno, name, grade, deptno, profno)
+    VALUES (seq_student_sequence.NEXTVAL, '김기현', 1, '101', 1001);
+INSERT INTO student (studno, name, grade, deptno, profno)
+    VALUES (seq_student_sequence.NEXTVAL, '김민영', 2, '101', 1003);
+INSERT INTO student (studno, name, grade, deptno, profno)
+    VALUES (seq_student_sequence.NEXTVAL, '김정환', 3, '101', 1001);
+INSERT INTO student (studno, name, grade, deptno, profno)
+    VALUES (seq_student_sequence.NEXTVAL, '김준태', 4, '101', 1003);
+INSERT INTO student (studno, name, grade, deptno, profno)
+    VALUES (seq_student_sequence.NEXTVAL, '김지용', 1, '102', 1002);
+INSERT INTO student (studno, name, grade, deptno, profno)
+    VALUES (seq_student_sequence.NEXTVAL, '김진', 2, '102', NULL);
+INSERT INTO student (studno, name, grade, deptno, profno)
+    VALUES (seq_student_sequence.NEXTVAL, '김찬권', 3, '102', 1002);
+INSERT INTO student (studno, name, grade, deptno, profno)
+    VALUES (seq_student_sequence.NEXTVAL, '김옥규', 1, '103', 1004);
+INSERT INTO student (studno, name, grade, deptno, profno)
+    VALUES (seq_student_sequence.NEXTVAL, '박원영', 2, '103', 1006);
+INSERT INTO student (studno, name, grade, deptno, profno)
+    VALUES (seq_student_sequence.NEXTVAL, '박의종', 3, '103', NULL);
+    
+SELECT * FROM student;
+
+-- 6-3. 교수 테이블
+CREATE SEQUENCE seq_professor_sequence
+    MAXVALUE 9999
+    MINVALUE 1001
+    NOCYCLE;
+
+INSERT INTO professor (profno, name, deptno, position, pay)
+    VALUES (seq_professor_sequence.NEXTVAL, '홍길동','101','정교수',450);
+INSERT INTO professor (profno, name, deptno, position, pay)
+    VALUES (seq_professor_sequence.NEXTVAL, '김연아','102','정교수',400);
+INSERT INTO professor (profno, name, deptno, position, pay)
+    VALUES (seq_professor_sequence.NEXTVAL, '박지성','101','부교수',350);
+INSERT INTO professor (profno, name, deptno, position, pay)
+    VALUES (seq_professor_sequence.NEXTVAL, '김태근','103','정교수',410);
+INSERT INTO professor (profno, name, deptno, position, pay)
+    VALUES (seq_professor_sequence.NEXTVAL, '서찬수','101','전임강사',250);
+INSERT INTO professor (profno, name, deptno, position, pay)
+    VALUES (seq_professor_sequence.NEXTVAL, '김수현','103','부교수',350);
+INSERT INTO professor (profno, name, deptno, position, pay)
+    VALUES (seq_professor_sequence.NEXTVAL, '정동진','102','전임강사',320);
+INSERT INTO professor (profno, name, deptno, position, pay)
+    VALUES (seq_professor_sequence.NEXTVAL, '임진영','103','전임강사',200);
+
+SELECT * FROM professor;
+
+    
+
+
+-- 7. 학생(student) 테이블에서 101번 학생의 이름을 이기현으로 수정하는 쿼리를 작성하시오.
+UPDATE student
+    SET name = '이기현'
+WHERE studno = '101';
+SELECT * FROM student;
+
+
+
+--  8. student(학생) 테이블과 dept(학과) 테이블을 deptno를 참조하여
+-- EQUAL JOIN(등가조인) 하는 쿼리를 작성하시오. (단 select절의 칼럼은 편의상 *으로 표시한다)
+SELECT * FROM student S
+    INNER JOIN dept D ON D.deptno = S.deptno;
+
+
+
+-- 9. 학과(dept). 교수(professor) 테이블을 사용하여 학과별 평균 급여보다 높은 급여를 받는
+-- 교수의 이름, 학과명, 급여를 출력하는 쿼리를 작성하시오
+SELECT P.name, D.dname, P.pay FROM professor P
+    INNER JOIN dept D ON D.deptno = P.deptno
+    WHERE P.pay >
+        (SELECT AVG(P2.pay) FROM professor P2
+        WHERE P2.deptno = P.deptno);
+
+
+
+-- 10. professor(교수) 테이블에서 그룹함수를 사용하여 deptno별로
+-- pay의 합과 평균, 인원수를 출력하는 쿼리를 작성하시오. 
+SELECT SUM(pay) AS SUM,
+    TRUNC(AVG(pay)) AS AVG,
+    COUNT(*) AS CNT
+FROM professor
+GROUP BY deptno;
+
+
+
+-- 11. student(학생) 테이블의 deptno는 현재 dept(학과) 테이블의 deptno를 참조하고 있다.
+-- student(학생)테이블의 studno가 110인 사람의 deptno를 104로 수정을 해야 한다면 수정을 할 수 없다.
+-- 그 이유는 무엇이며 꼭 수정해야한다면 어떻게 해야 할지 서술하시오.
+-- (쿼리 작성이 아닌 해결방법만 서술하시오.)
+
+-- 학생 테이블의 deptno 필드는 학과 테이블의 deptno를 참조하고 있는 외래키이다.
+-- 따라서 학과 테이블의 deptno 필드에 104 데이터가 없다면
+-- 참조 무결성 조건으로 인해 학생 테이블의 deptno 필드에서도 104로 입력이 불가하다.
+-- 해결 방법으로는 먼저 학과 테이블의 deptno 필드에 104 데이터를 입력한다.
+-- 그리고나서 학생 테이블에서 deptno에 104를 입력하면 된다.
+
+
+
+-- 12. 교수(professor) 테이블과 학과(dept) 테이블을 활용하여
+-- 학과별 급여가 가장 높은 사람의 교수명(name), 학과명(dname), 급여(pay)를 출력하라.
+SELECT P.name, D.dname, P.pay FROM professor P
+    INNER JOIN dept D on D.deptno = P.deptno
+    WHERE P.pay IN
+        (SELECT MAX(P2.pay) FROM professor P2
+            GROUP BY P2.deptno);
+
+
+
+-- 13. 학생(student),교수(professor) 테이블을 활용하여 학생의 이름과 학생의 지도 교수명을 출력한다.
+-- 단, 지도교수가 없는 학생의 이름도 출력되도록 한다.
+SELECT S.name AS STUDENT,
+    P.name AS PROFESSOR
+FROM student S
+    LEFT OUTER JOIN professor P ON S.profno = P.profno;
+
+
+
+-- 14. 괄호 안에 들어갈 명령문을 완성하시오.
+-- DML이 일어나면 트랜잭션의 완료와 취소를 위한 DCL명령문이 필요하다. 데이터의 변경사항을 데이터베이스에 
+-- 영구히 기록시키는 것을 (commit)이라고 하며, 원래 상태로 돌리는 것을 (rollback)이라고 한다. 
+
+
+
+-- 15. guest02 사용자에게 guest01의 student 테이블을 select 할 수 있는 권한을 설정하라.
+CREATE USER guest02
+IDENTIFIED BY 1234;
+
+GRANT SELECT ON guest01.student TO guest02;
+
+
+
+-- 16. guest02 사용자에게 guest01의 student 테이블을 select 할 수 있는 권한을 제거하라.
+REVOKE SELECT ON guest01.student FROM guest02;
+
+
+
+-- 17. 다음은 무엇에 대한 설명인지 쓰시오.
+-- • 기본 테이블로부터 유도되어 만들어지며 독자적으로 존재하지 못하는 가상 테이블이다.
+-- • 필요한 데이터만 정의해서 처리할 수 있기 때문에 관리가 용이하고 명령문이 간단해진다.
+-- -> view
+
+
+
+-- 18. student(학생) 테이블의 studno, name, grade 필드를 선택하여 뷰(VIEW)를 작성하시오.
+CREATE VIEW vw_stud
+    AS(SELECT studno, name, grade FROM student);
+
+
+
+-- 19. 그룹함수는 where절에서 비교할 수 없다. 그렇다면 그룹함수는 어떻게 조건을 비교해야 하는가?
+-- -> GROUP BY 뒤에 HAVING절로 비교한다.
+
+
+
+--  20. 데이터베이스를 운영하기 위한 정보들을 모두 특정한 테이블에 모아두고 관리하는데
+-- 그 테이블을 무엇이라고 하는가?  여기에는 제약조건 정보, 사용자에 대한 정보,
+-- 권한이나 프로파일 롤에 대한 정보를 가지고 있다.
+-- -> 데이터 사전
