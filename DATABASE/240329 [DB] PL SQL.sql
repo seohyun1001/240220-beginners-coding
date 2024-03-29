@@ -215,7 +215,7 @@ DECLARE
     v_deptno dept.deptno%TYPE := 41;
 BEGIN
     SELECT dname INTO v_deptno_row.dname FROM dept WHERE deptno = v_deptno;
-    CASE
+     CASE
         WHEN v_deptno = 10 THEN
             DBMS_OUTPUT.PUT_LINE('DNAME : ' || v_deptno_row.dname);
         WHEN v_deptno = 20 THEN
@@ -228,5 +228,87 @@ BEGIN
     EXCEPTION
         WHEN NO_DATA_FOUND THEN
         DBMS_OUTPUT.PUT_LINE('DNAME : N/A');
+END;
+/
+
+
+
+-- 윤년 확인하기
+-- 4로 나누어 떨어지면서, 100으로 나누어 떨어지지 않으면 윤년
+-- year 변수를 사용하여 윤년이라면 '윤년입니다' 윤년이 아니라면 '윤년이 아닙니다'
+DECLARE
+    year NUMBER := 2024;
+BEGIN
+    IF (MOD(year, 4) = 0 AND MOD(year, 100) <> 0) OR (MOD(year, 400) = 0) THEN
+        DBMS_OUTPUT.PUT_LINE('윤년입니다.');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('윤년이 아닙니다.');
+    END IF;
+END;
+/
+
+
+
+-- 가위바위보 게임 만들기
+-- 랜덤값 게임 만들기 : DBMS_RANDOM(범위 시작, 종료)
+-- 0:가위, 1:바위, 2:보
+DECLARE
+    rsp_user NUMBER(1) := TRUNC(DBMS_RANDOM.VALUE(0, 2));
+    rsp_com NUMBER(1) := TRUNC(DBMS_RANDOM.VALUE(0, 2));
+    USER VARCHAR2(10);
+    COM VARCHAR2(10);
+BEGIN
+    IF rsp_user = 0 THEN
+        USER := '가위';
+    ELSIF rsp_user = 1 THEN
+        USER := '바위';
+    ELSE
+        USER := '보';
+    END IF;
+    
+    IF rsp_com = 0 THEN
+        COM := '가위';
+    ELSIF rsp_com = 1 THEN
+        COM := '바위';
+    ELSE
+        COM := '보';
+    END IF;
+    
+    IF rsp_user = 0 THEN
+        IF rsp_com = 0 THEN
+            DBMS_OUTPUT.PUT_LINE('당신 : ' || USER || ' / 컴퓨터 : ' || COM);
+            DBMS_OUTPUT.PUT_LINE('무승부입니다.' );
+        ELSIF rsp_com = 1 THEN
+            DBMS_OUTPUT.PUT_LINE('당신 : ' || USER || ' / 컴퓨터 : ' || COM);
+            DBMS_OUTPUT.PUT_LINE('패배했습니다.');
+        ELSE
+            DBMS_OUTPUT.PUT_LINE('당신 : ' || USER || ' / 컴퓨터 : ' || COM);
+            DBMS_OUTPUT.PUT_LINE('승리했습니다.');
+        END IF;
+    ELSIF rsp_user = 1 THEN
+        IF rsp_com = 0 THEN
+            DBMS_OUTPUT.PUT_LINE('당신 : ' || USER || ' / 컴퓨터 : ' || COM);
+            DBMS_OUTPUT.PUT_LINE('승리했습니다.');
+        ELSIF rsp_com = 1 THEN
+            DBMS_OUTPUT.PUT_LINE('당신 : ' || USER || ' / 컴퓨터 : ' || COM);
+            DBMS_OUTPUT.PUT_LINE('무승부입니다.');
+        ELSE
+            DBMS_OUTPUT.PUT_LINE('당신 : ' || USER || ' / 컴퓨터 : ' || COM);
+            DBMS_OUTPUT.PUT_LINE('패배했습니다.');
+        END IF;
+    ELSIF rsp_user = 2 THEN
+        IF rsp_com = 0 THEN
+            DBMS_OUTPUT.PUT_LINE('당신 : ' || USER || ' / 컴퓨터 : ' || COM);
+            DBMS_OUTPUT.PUT_LINE('패배했습니다.');
+        ELSIF rsp_com = 1 THEN
+            DBMS_OUTPUT.PUT_LINE('당신 : ' || USER || ' / 컴퓨터 : ' || COM);
+            DBMS_OUTPUT.PUT_LINE('승리했습니다.');
+        ELSE
+            DBMS_OUTPUT.PUT_LINE('당신 : ' || USER || ' / 컴퓨터 : ' || COM);
+            DBMS_OUTPUT.PUT_LINE('무승부입니다.');
+        END IF;
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('0:가위, 1:바위, 2:보 중에 입력해주십시오.');
+    END IF;
 END;
 /
