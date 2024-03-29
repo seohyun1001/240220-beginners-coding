@@ -58,3 +58,175 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('V_DEPTNO : ' || v_deptno);
 END;
 /
+
+-- 실습 16-7(p.426)
+-- 변수에 NOT NULL을 설정하고 값을 대입한 후 출력
+DECLARE
+    v_deptno NUMBER(2) NOT NULL := 10;
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('V_DEPTNO : ' || v_deptno);
+END;
+/
+
+-- 실습 16-8(p.427)
+-- 변수에 NOT NULL 및 기본값을 설정하고 값을 대입한 후 출력
+DECLARE
+    v_deptno NUMBER(2) NOT NULL DEFAULT 20;
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('V_DEPTNO : ' || v_deptno);
+END;
+/
+
+
+
+-- 참조 자료형 : 특정 테이블의 열 자료형을 참조하여 사용하는 자료형
+-- 변수명 테이블명.필드명%TYPE : 열 자료형 참조
+-- 변수명 테이블명%ROWTYPE : 모든 열의 구조를 참조
+
+-- 실습 16-9(p.428)
+-- 참조형(열)의 변수에 값을 대입한 후 출력
+DECLARE
+    v_deptno dept.deptno%TYPE := 50;
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('V_DEPTNO : ' || v_deptno);
+END;
+/
+
+-- 실습 16-10(p.429)
+-- 참조형(행)의 변수에 값을 대입한 후 출력
+DECLARE
+    v_dept_row dept%ROWTYPE;
+BEGIN
+    SELECT deptno, dname, loc INTO v_dept_row
+        FROM dept WHERE deptno = 40;
+    DBMS_OUTPUT.PUT_LINE('DEPTNO : ' || v_dept_row.deptno);
+    DBMS_OUTPUT.PUT_LINE('DNAME : ' || v_dept_row.dname);
+    DBMS_OUTPUT.PUT_LINE('LOC : ' || v_dept_row.loc);
+END;
+/
+
+
+
+-- 조건 제어문
+-- 실습 16-14(p.434) : IF문
+DECLARE
+    v_score NUMBER := 87;
+BEGIN
+    IF v_score >=90 THEN
+        DBMS_OUTPUT.PUT_LINE('A');
+    ELSIF v_score >= 80 THEN
+        DBMS_OUTPUT.PUT_LINE('B');
+    ELSIF v_score >= 70 THEN
+        DBMS_OUTPUT.PUT_LINE('C');
+    ELSIF v_score >= 60 THEN
+        DBMS_OUTPUT.PUT_LINE('D');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('F');
+    END IF;
+END;
+/
+
+-- CASE문
+DECLARE
+    v_score NUMBER := 87;
+BEGIN
+    CASE
+        WHEN v_score >=90 THEN
+            DBMS_OUTPUT.PUT_LINE('A');
+        WHEN v_score >= 80 THEN
+            DBMS_OUTPUT.PUT_LINE('B');
+        WHEN v_score >= 70 THEN
+            DBMS_OUTPUT.PUT_LINE('C');
+        WHEN v_score >= 60 THEN
+            DBMS_OUTPUT.PUT_LINE('D');
+        ELSE
+            DBMS_OUTPUT.PUT_LINE('F');
+    END CASE;
+END;
+/
+
+
+
+-- 반복 제어문
+-- 실습 16-17(p.439) : 기본 LOOP
+DECLARE
+    v_num NUMBER := 0;
+BEGIN
+    LOOP
+        DBMS_OUTPUT.PUT_LINE('현재 V_NUM : ' || v_num);
+        v_num := v_num + 1;
+        EXIT WHEN v_num > 4;
+        -- EXIT의 조건이 TRUE라면 반복문 종료
+    END LOOP;
+END;
+/
+
+-- 실습 16-18(p.440) : WHILE LOOP
+DECLARE
+    v_num NUMBER := 0;
+BEGIN
+    WHILE v_num < 4 LOOP
+        DBMS_OUTPUT.PUT_LINE('현재 V_NUM : ' || v_num);
+        v_num := v_num + 1;
+    END LOOP;
+END;
+/
+
+-- 실습 16-19(p.441) : FOR LOOP
+BEGIN
+    FOR i IN 0..4 LOOP
+        DBMS_OUTPUT.PUT_LINE('현재 i의 값 : ' || i);
+    END LOOP;
+END;
+/
+
+-- 실습 16-20(p.442) : REVERSE FOR LOOP
+BEGIN
+    FOR i IN REVERSE 0..4 LOOP
+        DBMS_OUTPUT.PUT_LINE('현재 i의 값 : ' || i);
+    END LOOP;
+END;
+/
+
+-- 실습 16-21(p.442) : CONTINUE
+BEGIN
+    FOR i IN 0..4 LOOP
+        CONTINUE WHEN MOD(i,2) = 1;
+        DBMS_OUTPUT.PUT_LINE('현재 i의 값 : ' || i);
+    END LOOP;
+END;
+/
+
+
+
+-- 연습문제(p.444)
+-- 1.
+BEGIN
+    FOR i IN 1..10 LOOP
+        CONTINUE WHEN MOD(i,2) = 0;
+        DBMS_OUTPUT.PUT_LINE('현재 i의 값 : ' || i);
+    END LOOP;
+END;
+/
+
+-- 2.
+DECLARE
+    v_deptno_row dept%ROWTYPE;
+    v_deptno dept.deptno%TYPE := 41;
+BEGIN
+    SELECT dname INTO v_deptno_row.dname FROM dept WHERE deptno = v_deptno;
+    CASE
+        WHEN v_deptno = 10 THEN
+            DBMS_OUTPUT.PUT_LINE('DNAME : ' || v_deptno_row.dname);
+        WHEN v_deptno = 20 THEN
+            DBMS_OUTPUT.PUT_LINE('DNAME : ' || v_deptno_row.dname);
+        WHEN v_deptno = 30 THEN
+            DBMS_OUTPUT.PUT_LINE('DNAME : ' || v_deptno_row.dname);
+        WHEN v_deptno = 40 THEN
+            DBMS_OUTPUT.PUT_LINE('DNAME : ' || v_deptno_row.dname);
+        END CASE;
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('DNAME : N/A');
+END;
+/
