@@ -96,3 +96,145 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('LOC : ' || emp_rec.dinfo.loc);
 END;
 /
+
+
+
+-- 컬렉션 : 자료형이 같은 여러 데이터를 저장
+-- 실습 17-6(p.453)
+DECLARE
+    TYPE itab_ex IS TABLE OF VARCHAR2(20)
+INDEX BY pls_integer;
+text_arr itab_ex;
+BEGIN
+    text_arr(1) := '1st data';
+    text_arr(2) := '2nd data';
+    text_arr(3) := '3rd data';
+    text_arr(4) := '4th data';
+    
+    DBMS_OUTPUT.PUT_LINE('text_arr(1) : ' || text_arr(1));
+    DBMS_OUTPUT.PUT_LINE('text_arr(2) : ' || text_arr(2));
+    DBMS_OUTPUT.PUT_LINE('text_arr(3) : ' || text_arr(3));
+    DBMS_OUTPUT.PUT_LINE('text_arr(4) : ' || text_arr(4));
+END;
+/
+
+-- 실습 17-7(p.453)
+DECLARE
+    TYPE rec_dept IS RECORD (
+        deptno dept.deptno%TYPE,
+        dname dept.dname%TYPE
+    );
+    
+    TYPE itab_dept IS TABLE OF rec_dept
+        INDEX BY pls_integer;
+        
+    dept_arr itab_dept;
+    idx pls_integer := 0;
+BEGIN
+    FOR i IN(SELECT deptno, dname FROM dept) LOOP
+        idx := idx + 1;
+        dept_arr(idx).deptno := i.deptno;
+        dept_arr(idx).dname := i.dname;
+        
+        DBMS_OUTPUT.PUT_LINE (
+            dept_arr(idx).deptno || ' : ' || dept_arr(idx).dname);
+    END LOOP;
+END;
+/
+
+
+
+-- 실습 17-8(p.454)
+DECLARE
+    TYPE itab_dept IS TABLE OF dept%ROWTYPE
+        INDEX BY pls_integer;
+        
+    dept_arr itab_dept;
+    idx pls_integer := 0;
+BEGIN
+    FOR i IN(SELECT * FROM dept) LOOP
+        idx := idx + 1;
+        dept_arr(idx).deptno := i.deptno;
+        dept_arr(idx).dname := i.dname;
+        dept_arr(idx).loc := i.loc;
+        
+        DBMS_OUTPUT.PUT_LINE (
+            dept_arr(idx).deptno || ' : ' ||
+            dept_arr(idx).dname || ' : ' ||
+            dept_arr(idx).loc);
+    END LOOP;
+END;
+/
+
+
+
+-- 연습문제(p.457~p.458)
+-- 1.
+CREATE TABLE emp_record
+    AS SELECT * FROM emp;
+SELECT * FROM emp_record;
+
+DECLARE
+    TYPE emp_rec IS RECORD (
+        empno emp.empno%TYPE,
+        ename emp.ename%TYPE,
+        job emp.job%TYPE,
+        mgr emp.mgr%TYPE,
+        hiredate emp.hiredate%TYPE,
+        sal emp.sal%TYPE,
+        comm emp.comm%TYPE,
+        deptno emp.deptno%TYPE
+    );
+    
+    rec_emp EMP_REC;
+    
+BEGIN
+    rec_emp.empno := 1111;
+    rec_emp.ename := 'TEST_USER';
+    rec_emp.job := 'TEST_JOB';
+    rec_emp.mgr := null;
+    rec_emp.hiredate := '18/03/01';
+    rec_emp.sal := 3000;
+    rec_emp.comm := null;
+    rec_emp.deptno := 40;
+
+INSERT INTO emp_record
+    VALUES rec_emp;
+END;
+/
+SELECT * FROM emp_record;
+
+
+
+-- 2.
+DECLARE
+    TYPE itab_emp IS TABLE OF emp%ROWTYPE
+        INDEX BY pls_integer;
+        
+    emp_arr itab_emp;
+    idx pls_integer := 0;
+
+BEGIN
+    FOR i IN(SELECT * FROM emp) LOOP
+        idx := idx + 1;
+        emp_arr(idx).empno := i.empno;
+        emp_arr(idx).ename := i.ename;
+        emp_arr(idx).job := i.job;
+        emp_arr(idx).mgr := i.mgr;
+        emp_arr(idx).hiredate := i.hiredate;
+        emp_arr(idx).sal := i.sal;
+        emp_arr(idx).comm := i.comm;
+        emp_arr(idx).deptno := i.deptno;
+        
+        DBMS_OUTPUT.PUT_LINE (
+            emp_arr(idx).empno || ' : ' ||
+            emp_arr(idx).ename || ' : ' ||
+            emp_arr(idx).job || ' : ' ||
+            emp_arr(idx).mgr || ' : ' ||
+            emp_arr(idx).hiredate || ' : ' ||
+            emp_arr(idx).sal || ' : ' ||
+            emp_arr(idx).comm || ' : ' ||
+            emp_arr(idx).deptno);
+    END LOOP;
+END;
+/
