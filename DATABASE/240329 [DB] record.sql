@@ -171,8 +171,10 @@ END;
 -- 연습문제(p.457~p.458)
 -- 1.
 CREATE TABLE emp_record
-    AS SELECT * FROM emp;
+    AS SELECT * FROM emp
+    WHERE 1 <> 1;
 SELECT * FROM emp_record;
+DROP TABLE emp_record;
 
 DECLARE
     TYPE emp_rec IS RECORD (
@@ -193,7 +195,7 @@ BEGIN
     rec_emp.ename := 'TEST_USER';
     rec_emp.job := 'TEST_JOB';
     rec_emp.mgr := null;
-    rec_emp.hiredate := '18/03/01';
+    rec_emp.hiredate := TO_DATE('18/03/01', 'YY/MM/DD');
     rec_emp.sal := 3000;
     rec_emp.comm := null;
     rec_emp.deptno := 40;
